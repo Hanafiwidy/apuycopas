@@ -4,244 +4,575 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apuy Copas Copas | Engineer Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #4F46E5;
-            --primary-hover: #4338CA;
-            --sidebar-bg: #111827;
-            --sidebar-hover: #1F2937;
-            --sidebar-active: #374151;
+            --accent: #6366F1;
+            --accent-soft: #EEF2FF;
+            --accent-mid: #818CF8;
+            --sidebar-bg: #0F0F14;
+            --sidebar-border: rgba(255,255,255,0.06);
+            --sidebar-hover: rgba(255,255,255,0.06);
+            --sidebar-active-bg: rgba(99,102,241,0.15);
+            --sidebar-active-border: #6366F1;
             --success: #10B981;
-            --success-hover: #059669;
             --warning: #F59E0B;
-            --warning-hover: #D97706;
             --danger: #EF4444;
-            --danger-hover: #DC2626;
-            --bg-color: #F3F4F6;
-            --card-bg: #FFFFFF;
-            --text-main: #1F2937;
-            --text-muted: #6B7280;
-            --border-color: #E5E7EB;
-            --sidebar-width: 260px;
+            --bg: #F5F5F7;
+            --surface: #FFFFFF;
+            --border: rgba(0,0,0,0.07);
+            --border-strong: rgba(0,0,0,0.12);
+            --text-1: #0A0A0F;
+            --text-2: #52525B;
+            --text-3: #A1A1AA;
+            --sidebar-w: 248px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
         }
 
-        * { box-sizing: border-box; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text-1);
             display: flex;
             height: 100vh;
             overflow: hidden;
+            font-size: 14px;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- SIDEBAR STYLING --- */
+        /* ── SIDEBAR ── */
         .sidebar {
-            width: var(--sidebar-width);
-            background-color: var(--sidebar-bg);
-            color: #FFFFFF;
+            width: var(--sidebar-w);
+            background: var(--sidebar-bg);
             display: flex;
             flex-direction: column;
-            box-shadow: 4px 0 10px rgba(0,0,0,0.05);
-            z-index: 10;
-        }
-        .sidebar-brand {
-            padding: 24px;
-            font-size: 20px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            color: #818CF8;
-        }
-        .sidebar-menu {
-            flex: 1;
-            padding: 20px 0;
-        }
-        .nav-item {
-            padding: 16px 24px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #9CA3AF;
-            font-weight: 500;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border-left: 4px solid transparent;
-        }
-        .nav-item:hover {
-            background-color: var(--sidebar-hover);
-            color: #FFFFFF;
-        }
-        .nav-item.active {
-            background-color: var(--sidebar-active);
-            color: #FFFFFF;
-            border-left-color: var(--primary);
+            flex-shrink: 0;
+            border-right: 1px solid var(--sidebar-border);
         }
 
-        /* --- MAIN CONTENT STYLING --- */
-        .main-wrapper {
+        .brand {
+            padding: 20px 18px 16px;
+            border-bottom: 1px solid var(--sidebar-border);
+        }
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .brand-icon {
+            width: 32px; height: 32px;
+            background: linear-gradient(135deg, #6366F1, #818CF8);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .brand-icon svg { width: 16px; height: 16px; }
+        .brand-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #FFFFFF;
+            letter-spacing: -0.01em;
+        }
+        .brand-sub {
+            font-size: 10px;
+            font-weight: 400;
+            color: #52525B;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .nav-section {
+            padding: 12px 10px;
+            flex: 1;
+        }
+        .nav-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #3F3F46;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0 8px;
+            margin-bottom: 4px;
+            margin-top: 12px;
+        }
+        .nav-label:first-child { margin-top: 0; }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 10px;
+            border-radius: var(--radius-sm);
+            color: #71717A;
+            font-size: 13.5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+            border: 1px solid transparent;
+            user-select: none;
+            margin-bottom: 1px;
+        }
+        .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+        .nav-item:hover {
+            background: var(--sidebar-hover);
+            color: #D4D4D8;
+        }
+        .nav-item.active {
+            background: var(--sidebar-active-bg);
+            color: #C7D2FE;
+            border-color: rgba(99,102,241,0.2);
+        }
+        .nav-item.active .nav-dot {
+            background: var(--accent);
+        }
+        .nav-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #3F3F46;
+            flex-shrink: 0;
+            margin-left: auto;
+            display: none;
+        }
+        .nav-item.active .nav-dot { display: block; }
+
+        .sidebar-footer {
+            padding: 14px 10px;
+            border-top: 1px solid var(--sidebar-border);
+        }
+        .version-tag {
+            font-size: 11px;
+            color: #3F3F46;
+            padding: 0 8px;
+        }
+
+        /* ── MAIN ── */
+        .main {
             flex: 1;
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            min-width: 0;
         }
-        .content-area {
+
+        .topbar {
+            height: 52px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 28px;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        .topbar-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-1);
+        }
+        .topbar-badge {
+            font-size: 11px;
+            font-weight: 500;
+            padding: 3px 8px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border-radius: 20px;
+        }
+        .topbar-spacer { flex: 1; }
+        .topbar-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--success);
+            font-weight: 500;
+        }
+        .status-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .content {
             flex: 1;
-            padding: 30px 40px;
             overflow-y: auto;
+            padding: 28px;
         }
-        .tab-pane {
-            display: none;
-            animation: fadeIn 0.4s ease forwards;
-        }
-        .tab-pane.active {
-            display: block;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        .content::-webkit-scrollbar { width: 4px; }
+        .content::-webkit-scrollbar-track { background: transparent; }
+        .content::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
+
+        .tab-pane { display: none; animation: fadeUp 0.25s ease; }
+        .tab-pane.active { display: block; }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Typography & Header */
-        .header { margin-bottom: 30px; }
-        .header h2 { margin: 0; font-size: 28px; font-weight: 700; color: var(--text-main); letter-spacing: -0.025em; }
-        .header p { margin: 8px 0 0; color: var(--text-muted); font-size: 15px; }
+        /* ── PAGE HEADERS ── */
+        .page-header { margin-bottom: 24px; }
+        .page-header h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-1);
+            letter-spacing: -0.03em;
+            margin-bottom: 4px;
+        }
+        .page-header p { color: var(--text-2); font-size: 13.5px; line-height: 1.6; }
 
-        /* Card Container */
+        /* ── CARDS ── */
         .card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            padding: 24px;
-            margin-bottom: 24px;
-            border: 1px solid var(--border-color);
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            padding: 20px 22px;
+            margin-bottom: 18px;
         }
-
-        /* Input Area */
-        textarea {
-            width: 100%;
-            height: 160px;
-            padding: 16px;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            font-family: 'Courier New', Courier, monospace;
+        .card-title {
             font-size: 13px;
-            background-color: #F9FAFB;
-            color: var(--text-main);
-            box-sizing: border-box;
-            resize: vertical;
-            transition: all 0.2s ease;
-            margin-bottom: 20px;
+            font-weight: 600;
+            color: var(--text-1);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-            background-color: #FFF;
-        }
+        .card-title svg { width: 15px; height: 15px; color: var(--accent); }
 
-        /* Buttons */
-        .btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
-        button {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 10px 20px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
-            border-radius: 8px; border: none; cursor: pointer; transition: all 0.2s ease; color: #FFF;
-        }
-        .btn-primary { background-color: var(--primary); }
-        .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-1px); }
-        .btn-clear { background-color: transparent; color: var(--danger); border: 1px solid var(--danger); }
-        .btn-clear:hover { background-color: rgba(239, 68, 68, 0.05); }
-        .btn-copy { background-color: var(--success); }
-        .btn-copy:hover { background-color: var(--success-hover); transform: translateY(-1px); }
-        .btn-copy-data { background-color: var(--warning); color: #fff;}
-        .btn-copy-data:hover { background-color: var(--warning-hover); transform: translateY(-1px); }
-
-        /* Analytical Metrics Dashboard */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-        .metric-card {
-            background: #FFF;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        /* ── HERO HOME ── */
+        .hero {
+            background: var(--sidebar-bg);
+            border-radius: var(--radius-xl);
+            padding: 32px 30px;
+            margin-bottom: 18px;
             position: relative;
             overflow: hidden;
         }
-        .metric-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
-            background-color: var(--primary);
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 220px; height: 220px;
+            background: radial-gradient(circle, rgba(99,102,241,0.25) 0%, transparent 70%);
+            pointer-events: none;
         }
-        .metric-card.mc-warning::before { background-color: var(--warning); }
-        .metric-card.mc-success::before { background-color: var(--success); }
-        .metric-card.mc-danger::before { background-color: var(--danger); }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -40px; left: 30%;
+            width: 160px; height: 160px;
+            background: radial-gradient(circle, rgba(129,140,248,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-eyebrow {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-mid);
+            margin-bottom: 10px;
+        }
+        .hero h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #FFFFFF;
+            letter-spacing: -0.03em;
+            line-height: 1.25;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            font-size: 13.5px;
+            color: #71717A;
+            line-height: 1.65;
+            max-width: 520px;
+        }
 
-        .metric-title { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
-        .metric-value { font-size: 24px; font-weight: 700; color: var(--text-main); margin-bottom: 4px;}
-        .metric-subtitle { font-size: 12px; color: var(--text-muted); font-weight: 500;}
+        /* ── STEP LIST ── */
+        .steps { list-style: none; }
+        .step {
+            display: flex;
+            gap: 16px;
+            padding: 18px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .step:last-child { border-bottom: none; padding-bottom: 0; }
+        .step:first-child { padding-top: 0; }
+        .step-num {
+            width: 26px; height: 26px;
+            border-radius: 50%;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .step-body h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-1);
+            margin-bottom: 4px;
+        }
+        .step-body p { font-size: 13px; color: var(--text-2); line-height: 1.55; }
+        .step-body code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1px 5px;
+            color: var(--accent);
+        }
 
-        /* Table */
-        .table-wrapper { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border-color); background: #FFF; }
+        /* ── TEXTAREA ── */
+        textarea {
+            width: 100%;
+            height: 148px;
+            padding: 14px 16px;
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius-md);
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 12.5px;
+            background: #FAFAFA;
+            color: var(--text-1);
+            resize: vertical;
+            transition: border-color 0.15s, box-shadow 0.15s;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+            background: #fff;
+        }
+        textarea::placeholder { color: var(--text-3); }
+
+        /* ── BUTTONS ── */
+        .btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+        button {
+            display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+            padding: 9px 16px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            border: none;
+            cursor: pointer;
+            transition: all 0.15s;
+            letter-spacing: -0.01em;
+        }
+        button svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+        }
+        .btn-primary:hover { background: #4F46E5; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99,102,241,0.3); }
+        .btn-primary:active { transform: translateY(0); }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--danger);
+            border: 1px solid rgba(239,68,68,0.25);
+        }
+        .btn-ghost:hover { background: rgba(239,68,68,0.05); border-color: var(--danger); }
+
+        .btn-success {
+            background: var(--success);
+            color: #fff;
+        }
+        .btn-success:hover { background: #059669; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(16,185,129,0.25); }
+
+        .btn-amber {
+            background: var(--warning);
+            color: #fff;
+        }
+        .btn-amber:hover { background: #D97706; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(245,158,11,0.25); }
+
+        .btn-dark {
+            background: var(--sidebar-bg);
+            color: #C7D2FE;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .btn-dark:hover { background: #1C1C27; transform: translateY(-1px); }
+
+        /* ── METRICS ── */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+        .metric {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 18px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .metric::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+        .metric.m-indigo::after { background: linear-gradient(90deg, #6366F1, #818CF8); }
+        .metric.m-amber::after { background: linear-gradient(90deg, #F59E0B, #FCD34D); }
+        .metric.m-green::after { background: linear-gradient(90deg, #10B981, #34D399); }
+        .metric.m-red::after { background: linear-gradient(90deg, #EF4444, #F87171); }
+
+        .metric-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            margin-bottom: 10px;
+        }
+        .metric-val {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-1);
+            letter-spacing: -0.03em;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        .metric-sub { font-size: 12px; color: var(--text-3); }
+
+        /* ── TABLE ── */
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            background: var(--surface);
+            margin-bottom: 16px;
+        }
         table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        th, td { padding: 12px 16px; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); text-align: right; white-space: nowrap; }
-        .excel-cell { border: 1px solid var(--border-color); } 
-        th { background-color: #F8FAFC; font-weight: 600; color: var(--text-main); text-align: center; }
+        th, td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            text-align: right;
+            white-space: nowrap;
+        }
+        th {
+            background: #FAFAFA;
+            font-weight: 600;
+            font-size: 12px;
+            color: var(--text-2);
+            text-align: center;
+        }
         tr:last-child td { border-bottom: none; }
         td:last-child, th:last-child { border-right: none; }
-        tr:hover td { background-color: #F9FAFB; }
-        .text-center { text-align: center; } .text-left { text-align: left; }
-        .font-bold { font-weight: 700; color: var(--text-main); }
-        .bg-light { background-color: #F8FAFC; }
+        tr:hover td { background: #FAFAFA; }
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        .font-bold { font-weight: 600; color: var(--text-1); }
+        .bg-light { background: #FAFAFA; }
+        .excel-cell { border: 1px solid var(--border); }
 
-        /* Footer */
+        /* ── COPY ACTIONS BAR ── */
+        .action-bar {
+            background: #FAFAFA;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 14px 16px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .action-bar-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-3);
+            margin-right: 4px;
+        }
+
+        /* ── TOAST ── */
+        #toast-container {
+            position: fixed;
+            top: 18px; right: 18px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .toast {
+            background: var(--sidebar-bg);
+            color: #E4E4E7;
+            padding: 11px 16px;
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex; align-items: center; gap: 9px;
+            animation: toastIn 0.25s ease forwards;
+            opacity: 0;
+            transform: translateX(8px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+        }
+        .toast.fade-out { animation: toastOut 0.3s ease forwards; }
+        @keyframes toastIn { to { opacity: 1; transform: translateX(0); } }
+        @keyframes toastOut { to { opacity: 0; transform: translateY(-6px); } }
+
+        /* ── FOOTER ── */
         .footer {
             text-align: center;
-            padding: 20px;
-            font-size: 13px;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border-color);
-            background: #FFF;
+            padding: 14px;
+            font-size: 12px;
+            color: var(--text-3);
+            border-top: 1px solid var(--border);
+            background: var(--surface);
         }
 
-        /* Toast */
-        #toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
-        .toast {
-            background: #1F2937; color: #FFF; padding: 12px 20px; border-radius: 8px; font-size: 14px; font-weight: 500;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); display: flex; align-items: center; gap: 10px;
-            animation: slideIn 0.3s ease forwards; opacity: 0; transform: translateX(100%);
-        }
-        .toast.fade-out { animation: fadeOut 0.4s ease forwards; }
-        @keyframes slideIn { to { opacity: 1; transform: translateX(0); } }
-        @keyframes fadeOut { to { opacity: 0; transform: translateY(-10px); } }
+        /* Hidden storage textareas */
+        .hidden-ta { display: none; }
 
-        /* Home Tab Styles */
-        .hero-box {
-            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-            color: white; padding: 40px; border-radius: 16px; margin-bottom: 24px; box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+        /* command info chip */
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11.5px;
+            font-weight: 500;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin-top: 10px;
         }
-        .hero-box h1 { margin: 0 0 10px 0; font-size: 32px; }
-        .hero-box p { margin: 0; font-size: 16px; opacity: 0.9; line-height: 1.6; }
-        .step-list { list-style: none; padding: 0; margin: 0; }
-        .step-list li { padding: 20px 16px; border-bottom: 1px solid var(--border-color); display: flex; align-items: flex-start; gap: 16px;}
-        .step-list li:last-child { border-bottom: none; }
-        .step-number { background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; font-size: 14px;}
-        .step-text h4 { margin: 0 0 6px 0; color: var(--text-main); font-size: 16px;}
-        .step-text p { margin: 0; color: var(--text-muted); font-size: 14px; line-height: 1.5;}
+        .chip svg { width: 13px; height: 13px; }
+
+        /* section divider */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 4px 0 16px;
+        }
     </style>
 </head>
 <body>
 
-<textarea id="puttyCommand" style="display:none;">grep -hE "AGGR:\[ (MDM|JTS) \].*OPR:\[ (XL|ISAT|TSEL|THREE|SMARTFREN|AXIS|UNKNOWN) \]" isorouter* \
+<textarea id="puttyCommand" class="hidden-ta">grep -hE "AGGR:\[ (MDM|JTS) \].*OPR:\[ (XL|ISAT|TSEL|THREE|SMARTFREN|AXIS|UNKNOWN) \]" isorouter* \
 | awk '
 {
     split($1,t,":")
@@ -312,316 +643,529 @@ END{
     }
 }'</textarea>
 
+<textarea id="additionalCommand" class="hidden-ta"># Masukin kueri atau script tambahan lu di sini bro
+echo "Script tambahan sukses di-copy!"</textarea>
+
 <div id="toast-container"></div>
 
+<!-- ── SIDEBAR ── -->
 <aside class="sidebar">
-    <div class="sidebar-brand">
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-        Apuy Copas Copas
+    <div class="brand">
+        <div class="brand-logo">
+            <div class="brand-icon">
+                <svg fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <div>
+                <div class="brand-name">Apuy Copas Copas</div>
+                <div class="brand-sub">Engineer Dashboard</div>
+            </div>
+        </div>
     </div>
-    <div class="sidebar-menu">
+
+    <div class="nav-section">
+        <div class="nav-label">Menu</div>
+
         <div class="nav-item active" onclick="switchTab('home', this)">
-            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-            Home Overview
+            <svg fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            Beranda
+            <span class="nav-dot"></span>
         </div>
+
         <div class="nav-item" onclick="switchTab('dashboard', this)">
-            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+            <svg fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
             Dashboard Analytics
+            <span class="nav-dot"></span>
         </div>
+
+        <div class="nav-label" style="margin-top: 16px;">Rekap Trafik</div>
+
+        <div class="nav-item" onclick="switchTab('wa_traffic', this)">
+            <svg fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            Traffic WhatsApp
+            <span class="nav-dot"></span>
+        </div>
+
+        <div class="nav-item" onclick="switchTab('sms_traffic', this)">
+            <svg fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            Traffic SMS
+            <span class="nav-dot"></span>
+        </div>
+    </div>
+
+    <div class="sidebar-footer">
+        <div class="version-tag">v2.0 · 2026</div>
     </div>
 </aside>
 
-<div class="main-wrapper">
-    <div class="content-area">
-        
+<!-- ── MAIN ── -->
+<div class="main">
+    <div class="topbar">
+        <span class="topbar-title" id="topbar-title">Beranda</span>
+        <span class="topbar-badge" id="topbar-badge">Overview</span>
+        <div class="topbar-spacer"></div>
+        <div class="topbar-status">
+            <span class="status-dot"></span>
+            Sistem aktif
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- ── TAB: HOME ── -->
         <div id="home" class="tab-pane active">
-            <div class="hero-box">
-                <h1>Selamat Datang di Apuy Copas Copas</h1>
-                <p>Automasi paling gg. Parsing data log Trafik SMS MDM & JATIS menjadi format tabel ganteng, siap untuk di-export ke Excel hanya dalam hitungan detik anjay.</p>
+            <div class="hero">
+                <div class="hero-eyebrow">⚡ Automation Tool</div>
+                <h1>Selamat Datang,<br>NOC SMS & WA!</h1>
+                <p>Parsing log trafik SMS MDM &amp; JATIS jadi tabel siap export Excel — dalam hitungan detik. Pilih tab di sidebar untuk mulai.</p>
             </div>
-            
+
             <div class="card">
-                <h3 style="margin-top:0; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">Cara Penggunaan Tools</h3>
-                <ul class="step-list">
-                    <li>
-                        <div class="step-number">1</div>
-                        <div class="step-text">
+                <div class="card-title">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                    Panduan Penggunaan
+                </div>
+
+                <ul class="steps">
+                    <li class="step">
+                        <div class="step-num">1</div>
+                        <div class="step-body">
                             <h4>Tarik Data dari Server</h4>
-                            <p>Lakukan remote menggunakan PuTTY ke IP <code>10.0.3.3</code> dan masuk ke cd satkom/svr/APR , masukan command "klik copy command putty" ambil raw data trafik.<br>
-                            <span style="display:inline-block; margin-top:8px; font-weight:500; color:var(--primary);">💡 Tip: Copy script <i>awk</i> di bawah ini lalu paste diputty!</span>
-                            </p>
-                            <button class="btn-copy" style="padding: 6px 14px; font-size: 13px; margin-top: 10px; background-color: #374151; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onclick="copyPuTTYCommand()">
-                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right: 2px;"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                                Copy Command PuTTY
-                            </button>
+                            <p>Remote via PuTTY ke IP <code>10.0.3.3</code>, masuk ke direktori <code>cd satkom/svr/APR</code>, lalu jalankan script AWK di bawah.</p>
+                            <div style="margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap;">
+                                <button class="btn-dark" onclick="copyPuTTYCommand()">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                                    Copy Command PuTTY
+                                </button>
+                            </div>
+                            <div class="chip">
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                Paste ke PuTTY via klik kanan setelah copy
+                            </div>
                         </div>
                     </li>
-                    <li>
-                        <div class="step-number">2</div>
-                        <div class="step-text">
-                            <h4>Copy & Paste</h4>
-                            <p>Buka menu <b>Dashboard Analytics</b> di sidebar kiri, lalu paste seluruh teks log (AGGR : MDM / JTS) ke dalam kolom yang disediakan.</p>
+                    <li class="step">
+                        <div class="step-num">2</div>
+                        <div class="step-body">
+                            <h4>Pilih Tab &amp; Paste Data</h4>
+                            <p>Pilih tab yang sesuai di sidebar — <strong>Dashboard Analytics</strong> untuk raw log PuTTY, <strong>Traffic WhatsApp</strong> untuk data WABA, atau <strong>Traffic SMS</strong> untuk tabel report SMS.</p>
                         </div>
                     </li>
-                    <li>
-                        <div class="step-number">3</div>
-                        <div class="step-text">
-                            <h4>Process Data</h4>
-                            <p>Klik tombol <b>Process Data</b>. Sistem akan mengkalkulasi total per jam, peak hour, dan provider tertinggi secara otomatis.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="step-number">4</div>
-                        <div class="step-text">
-                            <h4>Export ke Excel</h4>
-                            <p>Gunakan tombol <b>Copy Full Tabel</b> untuk menyalin kerangka utuh, atau <b>Copy Nilai Provider Saja</b> jika ingin mem-paste angkanya saja ke template laporan Excel Anda.</p>
+                    <li class="step">
+                        <div class="step-num">3</div>
+                        <div class="step-body">
+                            <h4>Process &amp; Export ke Excel</h4>
+                            <p>Klik <strong>Process Data</strong>, lalu gunakan tombol <em>Copy Tabel</em> atau <em>Copy Nilai Saja</em> untuk langsung paste ke file laporan Excel.</p>
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
 
+        <!-- ── TAB: DASHBOARD ── -->
         <div id="dashboard" class="tab-pane">
-            <div class="header">
-                <h2>📊 Dashboard Analytics</h2>
-                <p>Paste log data Trafik SMS Anda di bawah ini untuk melihat analisa dan rekapitulasi data.</p>
+            <div class="page-header">
+                <h2>Dashboard Analytics</h2>
+                <p>Paste log data trafik SMS (raw PuTTY output) untuk melihat analisa dan rekapitulasi per provider.</p>
             </div>
 
             <div class="card">
                 <textarea id="logInput" placeholder="Paste raw log data di sini (AGGR : MDM / JTS)..."></textarea>
-                <div class="btn-group">
+                <div class="btn-row">
                     <button class="btn-primary" onclick="generateSummary()">
-                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         Process Data
                     </button>
-                    <button class="btn-clear" onclick="clearAll()">
-                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    <button class="btn-ghost" onclick="clearAll()">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
                         Clear
                     </button>
                 </div>
             </div>
 
             <div id="outputSection" style="display: none;">
-                
-                <h3 style="margin-top: 0; margin-bottom: 16px; color: var(--text-main);">📈 Analytical Insights</h3>
                 <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-title">Jam Tersibuk (Peak Hour)</div>
-                        <div class="metric-value" id="anaPeakVal">0</div>
-                        <div class="metric-subtitle" id="anaPeakHour">00.00 - 01.00</div>
+                    <div class="metric m-indigo">
+                        <div class="metric-label">Peak Hour</div>
+                        <div class="metric-val" id="anaPeakVal">0</div>
+                        <div class="metric-sub" id="anaPeakHour">00.00 – 01.00</div>
                     </div>
-                    <div class="metric-card mc-warning">
-                        <div class="metric-title">Top Provider (MDM)</div>
-                        <div class="metric-value" id="anaTopMdm">Unknown</div>
-                        <div class="metric-subtitle" id="anaTopMdmVal">0 SMS</div>
+                    <div class="metric m-amber">
+                        <div class="metric-label">Top Provider MDM</div>
+                        <div class="metric-val" id="anaTopMdm" style="font-size:18px;">—</div>
+                        <div class="metric-sub" id="anaTopMdmVal">0 SMS</div>
                     </div>
-                    <div class="metric-card mc-success">
-                        <div class="metric-title">Top Provider (JATIS)</div>
-                        <div class="metric-value" id="anaTopJatis">Telkomsel</div>
-                        <div class="metric-subtitle" id="anaTopJatisVal">0 SMS</div>
+                    <div class="metric m-green">
+                        <div class="metric-label">Top Provider JATIS</div>
+                        <div class="metric-val" id="anaTopJatis" style="font-size:18px;">Telkomsel</div>
+                        <div class="metric-sub" id="anaTopJatisVal">0 SMS</div>
                     </div>
-                    <div class="metric-card mc-danger">
-                        <div class="metric-title">Total Keseluruhan</div>
-                        <div class="metric-value" id="anaTotalAll" style="color: var(--primary);">0</div>
-                        <div class="metric-subtitle">MDM + JATIS</div>
-                    </div>
-                </div>
-
-                <div class="card" style="padding: 16px; margin-bottom: 16px; background: #F8FAFC;">
-                    <div class="btn-group">
-                        <button class="btn-copy" onclick="copyTables()">
-                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                            Copy Full Tabel
-                        </button>
-                        <button class="btn-copy-data" onclick="copyDataOnly()">
-                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                            Copy Nilai Provider Saja
-                        </button>
+                    <div class="metric m-red">
+                        <div class="metric-label">Total Keseluruhan</div>
+                        <div class="metric-val" id="anaTotalAll" style="color: var(--accent);">0</div>
+                        <div class="metric-sub">MDM + JATIS</div>
                     </div>
                 </div>
 
-                <div class="card" style="padding: 0; border: none; box-shadow: none; background: transparent;">
-                    <div id="tableContainer"></div>
+                <div class="action-bar">
+                    <span class="action-bar-label">Export:</span>
+                    <button class="btn-success" onclick="copyTables()">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                        Copy Full Tabel
+                    </button>
+                    <button class="btn-amber" onclick="copyDataOnly()">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        Copy Nilai Provider Saja
+                    </button>
                 </div>
-                
+
+                <div id="tableContainer"></div>
             </div>
         </div>
 
-    </div>
+        <!-- ── TAB: WA TRAFFIC ── -->
+        <div id="wa_traffic" class="tab-pane">
+            <div class="page-header">
+                <h2>Traffic WhatsApp (WABA)</h2>
+                <p>Ctrl+A → Ctrl+C seluruh isi web Traffic WABA, lalu paste di bawah untuk rekap horizontal per jam.</p>
+            </div>
+
+            <div class="card">
+                <textarea id="waInput" placeholder="Paste data Ctrl+A WABA di sini... Contoh:&#10;00.00 - 01.00&#10;Total: 30213"></textarea>
+                <div class="btn-row">
+                    <button class="btn-primary" onclick="processWA()">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Process Data WA
+                    </button>
+                    <button class="btn-ghost" onclick="document.getElementById('waInput').value=''; document.getElementById('waOutput').style.display='none';">
+                        Clear
+                    </button>
+                </div>
+            </div>
+
+            <div class="card" id="waOutput" style="display: none; padding: 16px;"></div>
+        </div>
+
+        <!-- ── TAB: SMS TRAFFIC ── -->
+        <div id="sms_traffic" class="tab-pane">
+            <div class="page-header">
+                <h2>Traffic SMS (Total TRF)</h2>
+                <p>Ctrl+A → Ctrl+C tabel web report SMS. Sistem otomatis deteksi berdasarkan tanggal untuk mengambil nilai TRF per jam.</p>
+            </div>
+
+            <div class="card">
+                <textarea id="smsInput" placeholder="Paste data Ctrl+A tabel SMS di sini...&#10;Contoh:&#10;2026-06-14	96.683	0,0&#10;2026-06-13	96.683	0,0	98.781	5,5	93.035	6,3 ..."></textarea>
+                <div class="btn-row">
+                    <button class="btn-primary" onclick="processSMS()">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Process Data SMS
+                    </button>
+                    <button class="btn-ghost" onclick="document.getElementById('smsInput').value=''; document.getElementById('smsOutput').style.display='none';">
+                        Clear
+                    </button>
+                </div>
+            </div>
+
+            <div class="card" id="smsOutput" style="display: none; padding: 16px;"></div>
+        </div>
+
+    </div><!-- /content -->
+
     <footer class="footer">
-        &copy; 2026 Copyright by <strong>Apuy Copas Copas</strong>. All rights reserved.
+        &copy; 2026 <strong>Apuy Copas Copas</strong> — All rights reserved.
     </footer>
 </div>
 
 <script>
-// --- UI Navigation Logic ---
+// ── Tab titles ──
+const tabMeta = {
+    home: { title: 'Beranda', badge: 'Overview' },
+    dashboard: { title: 'Dashboard Analytics', badge: 'Log Parser' },
+    wa_traffic: { title: 'Traffic WhatsApp', badge: 'WABA' },
+    sms_traffic: { title: 'Traffic SMS', badge: 'TRF' }
+};
+
+// ── Data storage ──
+window.currentWaData = {};
+window.currentSmsData = {};
+
 function switchTab(tabId, el) {
     document.querySelectorAll('.tab-pane').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     document.getElementById(tabId).classList.add('active');
     el.classList.add('active');
+    const meta = tabMeta[tabId] || {};
+    document.getElementById('topbar-title').textContent = meta.title || '';
+    document.getElementById('topbar-badge').textContent = meta.badge || '';
 }
-
-// --- FUNGSI COPY COMMAND PUTTY (BARU) ---
-function copyPuTTYCommand() {
-    let cmd = document.getElementById('puttyCommand').value;
-    let tempTextArea = document.createElement("textarea");
-    tempTextArea.value = cmd;
-    document.body.appendChild(tempTextArea);
-    tempTextArea.select();
-    
-    try {
-        document.execCommand('copy');
-        showToast('Command bash berhasil disalin! Siap paste (Klik Kanan) di PuTTY.', 'success');
-    } catch (err) {
-        showToast('Gagal menyalin command', 'error');
-    }
-    document.body.removeChild(tempTextArea);
-}
-
-
-// --- FUNGSI QUERY ASLI (Dipertahankan dan Ditambah Data Analytical) ---
-window.currentDataMap = null;
 
 function showToast(message, type = 'success') {
     const container = document.getElementById('toast-container');
     const toast = document.createElement('div');
     toast.className = 'toast';
-    const icon = type === 'success' 
-        ? '<svg width="20" height="20" fill="none" stroke="#10B981" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>'
-        : '<svg width="20" height="20" fill="none" stroke="#EF4444" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
-    toast.innerHTML = `${icon} <span>${message}</span>`;
+    const icon = type === 'success'
+        ? '<svg width="16" height="16" fill="none" stroke="#10B981" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>'
+        : '<svg width="16" height="16" fill="none" stroke="#EF4444" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>';
+    toast.innerHTML = `${icon}<span>${message}</span>`;
     container.appendChild(toast);
-    setTimeout(() => {
-        toast.classList.add('fade-out');
-        setTimeout(() => toast.remove(), 400);
-    }, 3500);
+    setTimeout(() => { toast.classList.add('fade-out'); setTimeout(() => toast.remove(), 400); }, 3200);
 }
 
-function generateSummary() {
-    let inputText = document.getElementById('logInput').value;
-    if (!inputText || inputText.trim() === '') {
-        showToast('Teks log masih kosong bro!', 'error');
-        return;
-    }
+function copyPuTTYCommand() {
+    let cmd = document.getElementById('puttyCommand').value;
+    let ta = document.createElement('textarea');
+    ta.value = cmd; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); showToast('Command AWK disalin! Paste klik kanan di PuTTY.'); }
+    catch(e) { showToast('Gagal menyalin command', 'error'); }
+    document.body.removeChild(ta);
+}
 
-    let dataMap = {
-        'MDM': { 'Indosat': [], 'XL': [], 'Telkomsel': [], '3 (Hutchison)': [], 'Smartfren': [], 'Axis': [], 'Unknown': [] },
-        'JATIS': { 'Telkomsel': [] }
-    };
+function copyAdditionalCommand() {
+    let cmd = document.getElementById('additionalCommand').value;
+    let ta = document.createElement('textarea');
+    ta.value = cmd; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); showToast('Command tambahan berhasil disalin!'); }
+    catch(e) { showToast('Gagal menyalin command', 'error'); }
+    document.body.removeChild(ta);
+}
 
-    for(let i=0; i<24; i++) {
-        for(let op in dataMap['MDM']) dataMap['MDM'][op][i] = 0;
-        dataMap['JATIS']['Telkomsel'][i] = 0;
-    }
-
-    let lines = inputText.split(/\r?\n/);
-    let currentAggr = '';
+// ── WA Traffic ──
+function processWA() {
+    let text = document.getElementById('waInput').value;
+    if (!text.trim()) return showToast('Data WABA masih kosong!', 'error');
+    let hourlyData = Array(24).fill(0);
+    let lines = text.split('\n');
     let dataFound = false;
-    
     for (let i = 0; i < lines.length; i++) {
         let lineClean = lines[i].replace(/\u00A0/g, ' ').trim();
-        if (lineClean === '') continue;
-        
-        let aggrMatch = lineClean.match(/AGGR\s*:\s*(MDM|JTS)/i);
-        if (aggrMatch) {
-            currentAggr = aggrMatch[1].toUpperCase() === 'JTS' ? 'JATIS' : 'MDM';
-            continue;
-        }
-        
-        let dataMatch = lineClean.match(/^(\d{2})\s+([A-Za-z0-9_-]+)\s+(\d+)$/);
-        if (dataMatch && currentAggr) {
-            dataFound = true;
-            let hour = parseInt(dataMatch[1], 10);
-            let oprRaw = dataMatch[2].toUpperCase();
-            let total = parseInt(dataMatch[3], 10);
-            
-            let opr = oprRaw;
-            if (oprRaw === 'TSEL') opr = 'Telkomsel';
-            else if (oprRaw === 'ISAT') opr = 'Indosat';
-            else if (oprRaw === 'THREE') opr = '3 (Hutchison)';
-            else if (oprRaw === 'SMARTFREN') opr = 'Smartfren';
-            else if (oprRaw === 'UNKNOWN') opr = 'Unknown';
-            else if (oprRaw === 'XL') opr = 'XL';
-            else if (oprRaw === 'AXIS') opr = 'Axis';
-
-            if (dataMap[currentAggr] && dataMap[currentAggr][opr] !== undefined) {
-                dataMap[currentAggr][opr][hour] += total;
+        let matchHour = lineClean.match(/(\d{2})[.:]\d{2}\s*-\s*(\d{2})[.:]\d{2}/);
+        if (matchHour) {
+            let hour = parseInt(matchHour[1], 10);
+            for (let j = i + 1; j < Math.min(i + 5, lines.length); j++) {
+                let nextLine = lines[j].replace(/\u00A0/g, ' ').trim();
+                let matchTotal = nextLine.match(/Total:\s*([\d,.]+)/i);
+                if (matchTotal) {
+                    let numericVal = parseInt(matchTotal[1].replace(/[^0-9]/g, ''), 10);
+                    if (!isNaN(numericVal)) { hourlyData[hour] = numericVal; dataFound = true; break; }
+                }
             }
         }
     }
+    if (!dataFound) return showToast('Gagal mendeteksi pola Total jam WABA. Ulangi paste!', 'error');
+    window.currentWaData = { 'WHATSAPP': hourlyData };
+    renderHorizontalTableMulti('waOutput', window.currentWaData, 'WA', 'Summary Traffic WhatsApp (WABA)');
+    showToast('Data WABA berhasil diproses!');
+}
 
-    if (!dataFound) {
-        showToast('Format tidak sesuai / Data tidak ditemukan.', 'error');
-        return;
+// ── SMS Traffic ──
+// Format input: tab-separated, tiap row data = YYYY-MM-DD \t TRF \t DTR \t TRF \t DTR ...
+// Tabel web dipecah per 8 jam (0-8, 8-16, 16-24), jadi satu tanggal muncul 3x baris.
+// Parser ini menggabungkan semua kemunculan tanggal yang sama dan hanya ambil kolom TRF (ganjil).
+function processSMS() {
+    let text = document.getElementById('smsInput').value;
+    if (!text.trim()) return showToast('Data SMS masih kosong!', 'error');
+
+    let dataByDate = {};
+    let dataFound = false;
+    let lines = text.split('\n');
+
+    lines.forEach(line => {
+        // Normalize: ganti multiple whitespace/tab jadi single tab, trim
+        let cols = line.replace(/\r/g, '').split('\t').map(c => c.trim());
+
+        // Cari kolom pertama yang cocok format tanggal YYYY-MM-DD
+        // (kadang ada spasi/karakter sebelum tanggal karena Ctrl+A dari web)
+        let dateColIdx = -1;
+        let dateVal = '';
+        for (let ci = 0; ci < cols.length; ci++) {
+            let m = cols[ci].match(/(\d{4}-\d{2}-\d{2})/);
+            if (m) { dateColIdx = ci; dateVal = m[1]; break; }
+        }
+        if (dateColIdx < 0) return;
+
+        // Kolom setelah tanggal adalah pasangan TRF, DTR, TRF, DTR, ...
+        // Kita ambil index ganjil relatif ke kolom setelah tanggal (0=TRF, 1=DTR, 2=TRF, ...)
+        // Jadi ambil index 0, 2, 4, 6, ... (TRF saja, skip DTR)
+        let dataCols = cols.slice(dateColIdx + 1);
+
+        if (!dataByDate[dateVal]) dataByDate[dateVal] = [];
+
+        for (let i = 0; i < dataCols.length; i += 2) {
+            let raw = dataCols[i];
+            if (raw === '' || raw === undefined) {
+                // Slot kosong (jam belum ada datanya) — push 0 sebagai placeholder
+                dataByDate[dateVal].push(0);
+                continue;
+            }
+            // TRF bisa format: "96.683" (titik ribuan, bukan desimal) atau "96683" atau "0"
+            // Buang titik ribuan lalu parse integer
+            let cleaned = raw.replace(/\./g, '').replace(',', '.'); // titik = ribuan, koma = desimal
+            let val = parseInt(cleaned, 10);
+            if (isNaN(val)) val = 0;
+            dataByDate[dateVal].push(val);
+        }
+        dataFound = true;
+    });
+
+    if (!dataFound) return showToast('Gagal mendeteksi data SMS. Pastikan hasil Ctrl+A web report di-paste lengkap!', 'error');
+
+    // Standarisasi ke 24 slot per tanggal
+    let finalData = {};
+    for (let date in dataByDate) {
+        let arr = dataByDate[date];
+        while (arr.length < 24) arr.push(0);
+        finalData[`SMS (${date})`] = arr.slice(0, 24);
     }
+
+    window.currentSmsData = finalData;
+    renderHorizontalTableMulti('smsOutput', finalData, 'SMS', 'Summary Traffic SMS (TRF) Per Hari');
+    showToast('Data SMS berhasil diproses!');
+}
+
+function renderHorizontalTableMulti(containerId, dataObj, type, title) {
+    let html = `
+    <p style="font-size:13px; font-weight:600; color:var(--accent); margin-bottom:14px;">${title}</p>
+    <div class="table-wrap" style="margin-bottom:16px;">
+        <table id="table_${type}">
+            <tr>
+                <th class="excel-cell bg-light text-center" style="min-width:140px; font-weight:700;">Tanggal / Layanan</th>`;
+    for(let i=0;i<24;i++){
+        let h1=i.toString().padStart(2,'0')+'.00', h2=(i+1).toString().padStart(2,'0')+'.00';
+        html+=`<th class="excel-cell bg-light text-center" style="min-width:82px;">${h1}–${h2}</th>`;
+    }
+    html+=`<th class="excel-cell bg-light text-center" style="min-width:100px; font-weight:700;">Total</th></tr>`;
+    for(let label in dataObj){
+        let dataArr=dataObj[label], total=0;
+        html+=`<tr><td class="excel-cell font-bold bg-light text-left" style="white-space:nowrap;">${label}</td>`;
+        for(let i=0;i<24;i++){
+            let val=dataArr[i]||0; total+=val;
+            html+=`<td class="excel-cell text-center">${val===0?'–':val.toLocaleString('id-ID')}</td>`;
+        }
+        html+=`<td class="excel-cell font-bold text-center" style="color:var(--accent);background:#F5F5FF;">${total.toLocaleString('id-ID')}</td></tr>`;
+    }
+    html+=`</table></div>
+    <div class="btn-row">
+        <button class="btn-success" onclick="copyTableElem('table_${type}')">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            Copy Tabel Lengkap
+        </button>
+        <button class="btn-amber" onclick="copyHorizontalValues('${type}')">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            Copy Nilai Saja (Menyamping)
+        </button>
+    </div>`;
+    let out = document.getElementById(containerId);
+    out.innerHTML = html; out.style.display = 'block';
+}
+
+function copyTableElem(tableId) {
+    let container = document.getElementById(tableId);
+    let range = document.createRange();
+    range.selectNode(container);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    try { document.execCommand('copy'); showToast('Tabel disalin! Siap paste ke Excel.'); }
+    catch(e) { showToast('Gagal menyalin tabel', 'error'); }
+    window.getSelection().removeAllRanges();
+}
+
+function copyHorizontalValues(type) {
+    let dataObj = type === 'WA' ? window.currentWaData : window.currentSmsData;
+    if(!dataObj || Object.keys(dataObj).length===0) return showToast('Data belum diproses!','error');
+    let tsvString = '';
+    for(let label in dataObj){ tsvString += dataObj[label].slice(0,24).join('\t')+'\n'; }
+    let ta = document.createElement('textarea');
+    ta.value = tsvString.trimEnd(); document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); showToast('Nilai angka disalin! Paste langsung di baris Excel.'); }
+    catch(e) { showToast('Gagal menyalin data','error'); }
+    document.body.removeChild(ta);
+}
+
+// ── Dashboard Analytics ──
+window.currentDataMap = null;
+
+function generateSummary() {
+    let inputText = document.getElementById('logInput').value;
+    if (!inputText || !inputText.trim()) { showToast('Log masih kosong!','error'); return; }
+
+    let dataMap = {
+        'MDM': { 'Indosat':[], 'XL':[], 'Telkomsel':[], '3 (Hutchison)':[], 'Smartfren':[], 'Axis':[], 'Unknown':[] },
+        'JATIS': { 'Telkomsel':[] }
+    };
+    for(let i=0;i<24;i++){
+        for(let op in dataMap['MDM']) dataMap['MDM'][op][i]=0;
+        dataMap['JATIS']['Telkomsel'][i]=0;
+    }
+
+    let lines = inputText.split(/\r?\n/);
+    let currentAggr = '', dataFound = false;
+
+    for(let i=0;i<lines.length;i++){
+        let lineClean = lines[i].replace(/\u00A0/g,' ').trim();
+        if(!lineClean) continue;
+        let aggrMatch = lineClean.match(/AGGR\s*:\s*(MDM|JTS)/i);
+        if(aggrMatch){ currentAggr = aggrMatch[1].toUpperCase()==='JTS'?'JATIS':'MDM'; continue; }
+        let dataMatch = lineClean.match(/^(\d{2})\s+([A-Za-z0-9_-]+)\s+(\d+)$/);
+        if(dataMatch && currentAggr){
+            dataFound = true;
+            let hour = parseInt(dataMatch[1],10);
+            let oprRaw = dataMatch[2].toUpperCase();
+            let total = parseInt(dataMatch[3],10);
+            let opr = oprRaw;
+            if(oprRaw==='TSEL') opr='Telkomsel';
+            else if(oprRaw==='ISAT') opr='Indosat';
+            else if(oprRaw==='THREE') opr='3 (Hutchison)';
+            else if(oprRaw==='SMARTFREN') opr='Smartfren';
+            else if(oprRaw==='UNKNOWN') opr='Unknown';
+            else if(oprRaw==='XL') opr='XL';
+            else if(oprRaw==='AXIS') opr='Axis';
+            if(dataMap[currentAggr] && dataMap[currentAggr][opr]!==undefined)
+                dataMap[currentAggr][opr][hour]+=total;
+        }
+    }
+    if(!dataFound){ showToast('Format tidak sesuai / Data tidak ditemukan.','error'); return; }
 
     window.currentDataMap = dataMap;
 
-    const fmt = (num, zeroEmpty = false) => {
-        if (num === 0) return zeroEmpty ? '' : '-';
-        return num.toLocaleString('en-US');
-    };
-    const pct = (part, total) => {
-        if (total === 0) return '0.00%';
-        return ((part / total) * 100).toFixed(2) + '%';
-    };
+    const fmt = (num, zeroEmpty=false) => { if(num===0) return zeroEmpty?'':'-'; return num.toLocaleString('en-US'); };
+    const pct = (part,total) => { if(total===0) return '0.00%'; return ((part/total)*100).toFixed(2)+'%'; };
 
-    let totalMdmCols = {};
-    let grandTotalMdm = 0;
-    let topProvider = { name: '-', total: 0 };
+    let totalMdmCols={}, grandTotalMdm=0, topProvider={name:'–',total:0};
+    for(let op in dataMap['MDM']){
+        let sumOp = dataMap['MDM'][op].reduce((a,b)=>a+b,0);
+        totalMdmCols[op]=sumOp; grandTotalMdm+=sumOp;
+        if(sumOp>topProvider.total && op!=='Unknown') topProvider={name:op,total:sumOp};
+    }
+    let sumJatisTsel = dataMap['JATIS']['Telkomsel'].reduce((a,b)=>a+b,0);
+    let grandTotalAll = grandTotalMdm+sumJatisTsel;
 
-    for (let op in dataMap['MDM']) {
-        let sumOp = dataMap['MDM'][op].reduce((a, b) => a + b, 0);
-        totalMdmCols[op] = sumOp;
-        grandTotalMdm += sumOp;
-        if (sumOp > topProvider.total && op !== 'Unknown') {
-            topProvider = { name: op, total: sumOp };
+    let peakHourVal=0, peakHourStr='00.00 – 01.00';
+    for(let i=0;i<24;i++){
+        let hourSum=0;
+        for(let op in dataMap['MDM']) hourSum+=dataMap['MDM'][op][i];
+        hourSum+=dataMap['JATIS']['Telkomsel'][i];
+        if(hourSum>peakHourVal){
+            peakHourVal=hourSum;
+            let h1=i.toString().padStart(2,'0')+'.00', h2=(i+1).toString().padStart(2,'0')+'.00';
+            peakHourStr=`${h1} – ${h2}`;
         }
     }
 
-    let sumJatisTsel = dataMap['JATIS']['Telkomsel'].reduce((a, b) => a + b, 0);
-    let grandTotalAll = grandTotalMdm + sumJatisTsel;
+    document.getElementById('anaPeakVal').innerText=fmt(peakHourVal);
+    document.getElementById('anaPeakHour').innerText='Pukul: '+peakHourStr;
+    document.getElementById('anaTopMdm').innerText=topProvider.name;
+    document.getElementById('anaTopMdmVal').innerText=fmt(topProvider.total)+' SMS';
+    document.getElementById('anaTopJatis').innerText='Telkomsel';
+    document.getElementById('anaTopJatisVal').innerText=fmt(sumJatisTsel)+' SMS';
+    document.getElementById('anaTotalAll').innerText=fmt(grandTotalAll);
 
-    // --- ANALYTICAL INSIGHTS LOGIC ---
-    let peakHourVal = 0;
-    let peakHourStr = "00.00 - 01.00";
-    for(let i=0; i<24; i++) {
-        let hourSum = 0;
-        for (let op in dataMap['MDM']) hourSum += dataMap['MDM'][op][i];
-        hourSum += dataMap['JATIS']['Telkomsel'][i];
-        
-        if(hourSum > peakHourVal) {
-            peakHourVal = hourSum;
-            let h1 = i.toString().padStart(2, '0') + '.00';
-            let h2 = (i + 1).toString().padStart(2, '0') + '.00';
-            peakHourStr = `${h1} - ${h2}`;
-        }
-    }
-
-    // Suntik data ke UI Analytics
-    document.getElementById('anaPeakVal').innerText = fmt(peakHourVal);
-    document.getElementById('anaPeakHour').innerText = "Pukul: " + peakHourStr;
-    document.getElementById('anaTopMdm').innerText = topProvider.name;
-    document.getElementById('anaTopMdmVal').innerText = fmt(topProvider.total) + " SMS";
-    document.getElementById('anaTopJatis').innerText = "Telkomsel"; // Default JATIS only Telkomsel based on dataMap structure
-    document.getElementById('anaTopJatisVal').innerText = fmt(sumJatisTsel) + " SMS";
-    document.getElementById('anaTotalAll').innerText = fmt(grandTotalAll);
-
-    // --- RENDER TABEL ---
     const today = new Date();
-    const dateOptions = { day: '2-digit', month: 'long', year: 'numeric' };
-    const dateString = today.toLocaleDateString('en-GB', dateOptions);
+    const dateString = today.toLocaleDateString('id-ID',{day:'2-digit',month:'long',year:'numeric'});
 
     let html = `
-    <div class="table-wrapper" style="margin-bottom: 20px;">
+    <div class="table-wrap" style="margin-bottom:18px;">
     <table id="mainTable">
-        <tr>
-            <th colspan="9" class="text-left bg-light excel-cell" style="font-size:15px; padding-bottom:12px;">Monitoring Trafik SMS</th>
-        </tr>
-        <tr>
-            <th colspan="9" class="text-center bg-light excel-cell" style="font-weight:normal;">${dateString}</th>
-        </tr>
+        <tr><th colspan="9" class="text-left bg-light excel-cell" style="font-size:14px; padding:14px 16px;">Monitoring Trafik SMS</th></tr>
+        <tr><th colspan="9" class="text-center bg-light excel-cell" style="font-weight:400; color:var(--text-2);">${dateString}</th></tr>
         <tr>
             <th rowspan="2" class="text-center excel-cell" style="vertical-align:middle;">Interval</th>
             <th colspan="7" class="text-center excel-cell">MDM</th>
@@ -636,98 +1180,87 @@ function generateSummary() {
             <th class="text-center excel-cell">Axis</th>
             <th class="text-center excel-cell">Unknown</th>
             <th class="text-center excel-cell">Telkomsel</th>
-        </tr>
-    `;
+        </tr>`;
 
-    for (let i = 0; i < 24; i++) {
-        let h1 = i.toString().padStart(2, '0') + '.00';
-        let h2 = (i + 1).toString().padStart(2, '0') + '.00';
-        let interval = `${h1} - ${h2}`;
-        
-        html += `<tr>`;
-        html += `<td class="text-center excel-cell">${interval}</td>`;
-        html += `<td class="excel-cell">${fmt(dataMap['MDM']['Indosat'][i], true)}</td>`;
-        html += `<td class="excel-cell">${fmt(dataMap['MDM']['XL'][i], true)}</td>`;
-        html += `<td class="excel-cell">${fmt(dataMap['MDM']['Telkomsel'][i], true)}</td>`;
-        html += `<td class="excel-cell">${fmt(dataMap['MDM']['3 (Hutchison)'][i], true)}</td>`;
-        html += `<td class="excel-cell">${fmt(dataMap['MDM']['Smartfren'][i], true)}</td>`;
-        html += `<td class="excel-cell">${fmt(dataMap['MDM']['Axis'][i], true)}</td>`;
-        html += `<td class="excel-cell">${fmt(dataMap['MDM']['Unknown'][i], true)}</td>`;
-        html += `<td class="excel-cell">${fmt(dataMap['JATIS']['Telkomsel'][i], true)}</td>`;
-        html += `</tr>`;
+    for(let i=0;i<24;i++){
+        let h1=i.toString().padStart(2,'0')+'.00', h2=(i+1).toString().padStart(2,'0')+'.00';
+        html+=`<tr>
+            <td class="text-center excel-cell">${h1} – ${h2}</td>
+            <td class="excel-cell">${fmt(dataMap['MDM']['Indosat'][i],true)}</td>
+            <td class="excel-cell">${fmt(dataMap['MDM']['XL'][i],true)}</td>
+            <td class="excel-cell">${fmt(dataMap['MDM']['Telkomsel'][i],true)}</td>
+            <td class="excel-cell">${fmt(dataMap['MDM']['3 (Hutchison)'][i],true)}</td>
+            <td class="excel-cell">${fmt(dataMap['MDM']['Smartfren'][i],true)}</td>
+            <td class="excel-cell">${fmt(dataMap['MDM']['Axis'][i],true)}</td>
+            <td class="excel-cell">${fmt(dataMap['MDM']['Unknown'][i],true)}</td>
+            <td class="excel-cell">${fmt(dataMap['JATIS']['Telkomsel'][i],true)}</td>
+        </tr>`;
     }
 
-    html += `<tr class="font-bold bg-light">`;
-    html += `<td class="text-center excel-cell">Total</td>`;
-    html += `<td class="excel-cell">${fmt(totalMdmCols['Indosat'])}</td>`;
-    html += `<td class="excel-cell">${fmt(totalMdmCols['XL'])}</td>`;
-    html += `<td class="excel-cell">${fmt(totalMdmCols['Telkomsel'])}</td>`;
-    html += `<td class="excel-cell">${fmt(totalMdmCols['3 (Hutchison)'])}</td>`;
-    html += `<td class="excel-cell">${fmt(totalMdmCols['Smartfren'])}</td>`;
-    html += `<td class="excel-cell">${fmt(totalMdmCols['Axis'])}</td>`;
-    html += `<td class="excel-cell">${fmt(totalMdmCols['Unknown'])}</td>`;
-    html += `<td class="excel-cell">${fmt(sumJatisTsel)}</td>`;
-    html += `</tr>`;
+    html+=`<tr class="font-bold bg-light">
+        <td class="text-center excel-cell">Total</td>
+        <td class="excel-cell">${fmt(totalMdmCols['Indosat'])}</td>
+        <td class="excel-cell">${fmt(totalMdmCols['XL'])}</td>
+        <td class="excel-cell">${fmt(totalMdmCols['Telkomsel'])}</td>
+        <td class="excel-cell">${fmt(totalMdmCols['3 (Hutchison)'])}</td>
+        <td class="excel-cell">${fmt(totalMdmCols['Smartfren'])}</td>
+        <td class="excel-cell">${fmt(totalMdmCols['Axis'])}</td>
+        <td class="excel-cell">${fmt(totalMdmCols['Unknown'])}</td>
+        <td class="excel-cell">${fmt(sumJatisTsel)}</td>
+    </tr>
+    <tr class="bg-light">
+        <td class="text-center font-bold excel-cell">% Provider/Hari</td>
+        <td class="excel-cell">${pct(totalMdmCols['Indosat'],grandTotalMdm)}</td>
+        <td class="excel-cell">${pct(totalMdmCols['XL'],grandTotalMdm)}</td>
+        <td class="excel-cell">${pct(totalMdmCols['Telkomsel'],grandTotalMdm)}</td>
+        <td class="excel-cell">${pct(totalMdmCols['3 (Hutchison)'],grandTotalMdm)}</td>
+        <td class="excel-cell">${pct(totalMdmCols['Smartfren'],grandTotalMdm)}</td>
+        <td class="excel-cell">${pct(totalMdmCols['Axis'],grandTotalMdm)}</td>
+        <td class="excel-cell">${pct(totalMdmCols['Unknown'],grandTotalMdm)}</td>
+        <td class="excel-cell">100.00%</td>
+    </tr></table></div>`;
 
-    html += `<tr class="bg-light">`;
-    html += `<td class="text-center font-bold excel-cell">Persentase Provider Perhari</td>`;
-    html += `<td class="excel-cell">${pct(totalMdmCols['Indosat'], grandTotalMdm)}</td>`;
-    html += `<td class="excel-cell">${pct(totalMdmCols['XL'], grandTotalMdm)}</td>`;
-    html += `<td class="excel-cell">${pct(totalMdmCols['Telkomsel'], grandTotalMdm)}</td>`;
-    html += `<td class="excel-cell">${pct(totalMdmCols['3 (Hutchison)'], grandTotalMdm)}</td>`;
-    html += `<td class="excel-cell">${pct(totalMdmCols['Smartfren'], grandTotalMdm)}</td>`;
-    html += `<td class="excel-cell">${pct(totalMdmCols['Axis'], grandTotalMdm)}</td>`;
-    html += `<td class="excel-cell">${pct(totalMdmCols['Unknown'], grandTotalMdm)}</td>`;
-    html += `<td class="excel-cell">100.00%</td>`; 
-    html += `</tr>`;
-    html += `</table></div>`;
+    let provList=['Telkomsel','Indosat','XL','3 (Hutchison)','Smartfren','Axis','Unknown'];
+    html+=`<div class="table-wrap" style="max-width:580px;">
+    <table>
+        <tr><th colspan="4" class="text-left excel-cell" style="background:#F5F5FF; color:var(--accent); padding:12px 16px;">Summary Monitoring Trafik SMS ${today.getFullYear()}</th></tr>
+        <tr>
+            <th class="text-center excel-cell">Provider</th>
+            <th class="text-center excel-cell">MDM</th>
+            <th class="text-center excel-cell">JATIS</th>
+            <th class="text-center excel-cell">TOTAL</th>
+        </tr>`;
 
-    // Summary Table Bawah
-    let provList = ['Telkomsel', 'Indosat', 'XL', '3 (Hutchison)', 'Smartfren', 'Axis', 'Unknown'];
-    
-    html += `<div class="table-wrapper" style="width: 100%; max-width: 600px; margin: 0 auto;">`;
-    html += `<table style="width: 100%;">`;
-    html += `<tr><th colspan="4" class="text-left excel-cell" style="background:#E5E7EB; padding:12px;">Summary Monitoring Trafic SMS ${today.getFullYear()}</th></tr>`;
-    html += `<tr>`;
-    html += `<th class="text-center excel-cell">Provider</th>`;
-    html += `<th class="text-center excel-cell">MDM</th>`;
-    html += `<th class="text-center excel-cell">JATIS</th>`;
-    html += `<th class="text-center excel-cell">TOTAL (MDM+JATIS)</th>`;
-    html += `</tr>`;
-
-    provList.forEach(prov => {
-        let mdmVal = totalMdmCols[prov] || 0;
-        let jatisVal = (prov === 'Telkomsel') ? sumJatisTsel : 0;
-        let rowTotal = mdmVal + jatisVal;
-
-        html += `<tr>`;
-        html += `<td class="text-left excel-cell">${prov}</td>`;
-        html += `<td class="excel-cell">${fmt(mdmVal)}</td>`;
-        html += `<td class="excel-cell">${fmt(jatisVal)}</td>`;
-        html += `<td class="font-bold excel-cell" style="color:var(--primary);">${fmt(rowTotal)}</td>`;
-        html += `</tr>`;
+    provList.forEach(prov=>{
+        let mdmVal=totalMdmCols[prov]||0;
+        let jatisVal=(prov==='Telkomsel')?sumJatisTsel:0;
+        let rowTotal=mdmVal+jatisVal;
+        html+=`<tr>
+            <td class="text-left excel-cell">${prov}</td>
+            <td class="excel-cell">${fmt(mdmVal)}</td>
+            <td class="excel-cell">${fmt(jatisVal)}</td>
+            <td class="font-bold excel-cell" style="color:var(--accent);">${fmt(rowTotal)}</td>
+        </tr>`;
     });
 
-    html += `<tr class="font-bold bg-light">`;
-    html += `<td class="text-left excel-cell">Total Trafik</td>`;
-    html += `<td class="excel-cell">${fmt(grandTotalMdm)}</td>`;
-    html += `<td class="excel-cell">${fmt(sumJatisTsel)}</td>`;
-    html += `<td class="excel-cell" style="color:var(--primary); font-size:14px;">${fmt(grandTotalAll)}</td>`;
-    html += `</tr>`;
-    html += `</table></div>`;
+    html+=`<tr class="font-bold bg-light">
+        <td class="text-left excel-cell">Total Trafik</td>
+        <td class="excel-cell">${fmt(grandTotalMdm)}</td>
+        <td class="excel-cell">${fmt(sumJatisTsel)}</td>
+        <td class="excel-cell" style="color:var(--accent);">${fmt(grandTotalAll)}</td>
+    </tr></table></div>`;
 
     document.getElementById('tableContainer').innerHTML = html;
     document.getElementById('outputSection').style.display = 'block';
-    
-    showToast('Dashboard Data Berhasil Diupdate!');
+    showToast('Dashboard berhasil diperbarui!');
 }
 
 function clearAll() {
-    document.getElementById('logInput').value = '';
-    document.getElementById('tableContainer').innerHTML = '';
-    document.getElementById('outputSection').style.display = 'none';
-    window.currentDataMap = null;
-    showToast('Area kerja dibersihkan', 'success');
+    document.getElementById('logInput').value='';
+    document.getElementById('tableContainer').innerHTML='';
+    document.getElementById('outputSection').style.display='none';
+    window.currentDataMap=null;
+    showToast('Area kerja dibersihkan.');
 }
 
 function copyTables() {
@@ -736,46 +1269,28 @@ function copyTables() {
     range.selectNode(container);
     window.getSelection().removeAllRanges();
     window.getSelection().addRange(range);
-    
-    try {
-        document.execCommand('copy');
-        showToast('Seluruh tabel disalin! Siap paste ke Excel.');
-    } catch(err) {
-        showToast('Gagal menyalin tabel', 'error');
-    }
+    try { document.execCommand('copy'); showToast('Seluruh tabel disalin! Siap paste ke Excel.'); }
+    catch(e) { showToast('Gagal menyalin tabel','error'); }
     window.getSelection().removeAllRanges();
 }
 
 function copyDataOnly() {
-    if (!window.currentDataMap) return;
-    
-    let map = window.currentDataMap;
-    let tsvString = "";
-    
-    for (let i = 0; i < 24; i++) {
-        let rowData = [
-            map['MDM']['Indosat'][i], map['MDM']['XL'][i], map['MDM']['Telkomsel'][i],
-            map['MDM']['3 (Hutchison)'][i], map['MDM']['Smartfren'][i], map['MDM']['Axis'][i],
-            map['MDM']['Unknown'][i], map['JATIS']['Telkomsel'][i]
-        ];
-        let rowStrings = rowData.map(val => val === 0 ? "" : val);
-        tsvString += rowStrings.join('\t') + '\n';
+    if(!window.currentDataMap){ showToast('Proses data dulu!','error'); return; }
+    let dm = window.currentDataMap;
+    let oprs=['Indosat','XL','Telkomsel','3 (Hutchison)','Smartfren','Axis','Unknown'];
+    let rows=[];
+    for(let i=0;i<24;i++){
+        let row=[];
+        oprs.forEach(op=>row.push(dm['MDM'][op][i]||0));
+        row.push(dm['JATIS']['Telkomsel'][i]||0);
+        rows.push(row.join('\t'));
     }
-    
-    let tempTextArea = document.createElement("textarea");
-    tempTextArea.value = tsvString;
-    document.body.appendChild(tempTextArea);
-    tempTextArea.select();
-    
-    try {
-        document.execCommand('copy');
-        showToast('Nilai Angka disalin! Paste di Cell Excel.');
-    } catch (err) {
-        showToast('Gagal menyalin data', 'error');
-    }
-    document.body.removeChild(tempTextArea);
+    let ta=document.createElement('textarea');
+    ta.value=rows.join('\n'); document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); showToast('Nilai provider disalin! Paste di baris Excel.'); }
+    catch(e) { showToast('Gagal menyalin','error'); }
+    document.body.removeChild(ta);
 }
 </script>
-
 </body>
 </html>
