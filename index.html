@@ -770,6 +770,7 @@ function generateSummary() {
             else if(oprRaw==='ISAT') opr='Indosat';
             else if(oprRaw==='THREE') opr='3 (Hutchison)';
             else if(oprRaw==='SMARTFREN') opr='Smartfren';
+            else if(oprRaw==='AXIS') opr='Axis';
             else if(oprRaw==='UNKNOWN') opr='Unknown';
             if(dataMap[curAggr]&&dataMap[curAggr][opr]!==undefined)
                 dataMap[curAggr][opr][hour]+=total;
