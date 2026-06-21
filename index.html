@@ -7,169 +7,235 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --accent: #6366F1; --accent-soft: #EEF2FF; --accent-mid: #818CF8;
-            --sidebar-bg: #0F0F14; --sidebar-border: rgba(255,255,255,0.06);
-            --sidebar-hover: rgba(255,255,255,0.06);
-            --sidebar-active-bg: rgba(99,102,241,0.15);
-            --success: #10B981; --warning: #F59E0B; --danger: #EF4444;
-            --bg: #F5F5F7; --surface: #FFFFFF;
-            --border: rgba(0,0,0,0.07); --border-strong: rgba(0,0,0,0.12);
-            --text-1: #0A0A0F; --text-2: #52525B; --text-3: #A1A1AA;
-            --sidebar-w: 252px;
-            --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 20px;
+            --accent:#6366F1; --accent-soft:#EEF2FF; --accent-mid:#818CF8;
+            --sidebar-bg:#0F0F14; --sidebar-border:rgba(255,255,255,0.06);
+            --sidebar-hover:rgba(255,255,255,0.06); --sidebar-active-bg:rgba(99,102,241,0.15);
+            --success:#10B981; --warning:#F59E0B; --danger:#EF4444;
+            --bg:#F5F5F7; --surface:#FFFFFF;
+            --border:rgba(0,0,0,0.07); --border-strong:rgba(0,0,0,0.12);
+            --text-1:#0A0A0F; --text-2:#52525B; --text-3:#A1A1AA;
+            --sidebar-w:252px;
+            --r-sm:8px; --r-md:12px; --r-lg:16px; --r-xl:20px;
         }
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text-1); display: flex; height: 100vh; overflow: hidden; font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text-1);display:flex;height:100vh;overflow:hidden;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;}
 
-        /* SIDEBAR */
-        .sidebar { width: var(--sidebar-w); background: var(--sidebar-bg); display: flex; flex-direction: column; flex-shrink: 0; border-right: 1px solid var(--sidebar-border); overflow-y: auto; }
-        .sidebar::-webkit-scrollbar { width: 3px; } .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); }
-        .brand { padding: 18px 16px 14px; border-bottom: 1px solid var(--sidebar-border); }
-        .brand-logo { display: flex; align-items: center; gap: 10px; }
-        .brand-icon { width: 32px; height: 32px; background: linear-gradient(135deg, #6366F1, #818CF8); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .brand-icon svg { width: 16px; height: 16px; }
-        .brand-name { font-size: 13.5px; font-weight: 700; color: #FFF; letter-spacing: -0.01em; }
-        .brand-sub { font-size: 10px; color: #52525B; letter-spacing: 0.04em; text-transform: uppercase; margin-top: 1px; }
-        .nav-section { padding: 10px 10px; flex: 1; }
-        .nav-label { font-size: 10px; font-weight: 600; color: #3F3F46; letter-spacing: 0.08em; text-transform: uppercase; padding: 0 8px; margin-bottom: 3px; margin-top: 14px; }
-        .nav-label:first-child { margin-top: 0; }
-        .nav-item { display: flex; align-items: center; gap: 9px; padding: 7.5px 10px; border-radius: var(--r-sm); color: #71717A; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; border: 1px solid transparent; user-select: none; margin-bottom: 1px; }
-        .nav-item svg { width: 15px; height: 15px; flex-shrink: 0; }
-        .nav-item:hover { background: var(--sidebar-hover); color: #D4D4D8; }
-        .nav-item.active { background: var(--sidebar-active-bg); color: #C7D2FE; border-color: rgba(99,102,241,0.2); }
-        .nav-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-left: auto; display: none; }
-        .nav-item.active .nav-dot { display: block; }
-        .sidebar-footer { padding: 12px 10px; border-top: 1px solid var(--sidebar-border); }
-        .version-tag { font-size: 11px; color: #3F3F46; padding: 0 8px; }
+        /* ══ SIDEBAR (desktop) ══ */
+        .sidebar{width:var(--sidebar-w);background:var(--sidebar-bg);display:flex;flex-direction:column;flex-shrink:0;border-right:1px solid var(--sidebar-border);overflow-y:auto;}
+        .sidebar::-webkit-scrollbar{width:3px;} .sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);}
+        .brand{padding:18px 16px 14px;border-bottom:1px solid var(--sidebar-border);}
+        .brand-logo{display:flex;align-items:center;gap:10px;}
+        .brand-icon{width:32px;height:32px;background:linear-gradient(135deg,#6366F1,#818CF8);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+        .brand-icon svg{width:16px;height:16px;}
+        .brand-name{font-size:13.5px;font-weight:700;color:#FFF;letter-spacing:-0.01em;}
+        .brand-sub{font-size:10px;color:#52525B;letter-spacing:0.04em;text-transform:uppercase;margin-top:1px;}
+        .nav-section{padding:10px;flex:1;}
+        .nav-label{font-size:10px;font-weight:600;color:#3F3F46;letter-spacing:0.08em;text-transform:uppercase;padding:0 8px;margin-bottom:3px;margin-top:14px;}
+        .nav-label:first-child{margin-top:0;}
+        .nav-item{display:flex;align-items:center;gap:9px;padding:7.5px 10px;border-radius:var(--r-sm);color:#71717A;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;border:1px solid transparent;user-select:none;margin-bottom:1px;}
+        .nav-item svg{width:15px;height:15px;flex-shrink:0;}
+        .nav-item:hover{background:var(--sidebar-hover);color:#D4D4D8;}
+        .nav-item.active{background:var(--sidebar-active-bg);color:#C7D2FE;border-color:rgba(99,102,241,0.2);}
+        .nav-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-left:auto;display:none;}
+        .nav-item.active .nav-dot{display:block;}
+        .sidebar-footer{padding:12px 10px;border-top:1px solid var(--sidebar-border);}
+        .version-tag{font-size:11px;color:#3F3F46;padding:0 8px;}
 
-        /* MAIN */
-        .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
-        .topbar { height: 50px; background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 26px; gap: 12px; flex-shrink: 0; }
-        .topbar-title { font-size: 13.5px; font-weight: 600; color: var(--text-1); }
-        .topbar-badge { font-size: 11px; font-weight: 500; padding: 2px 8px; background: var(--accent-soft); color: var(--accent); border-radius: 20px; }
-        .topbar-spacer { flex: 1; }
-        .topbar-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--success); font-weight: 500; }
-        .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success); animation: blink 2s infinite; }
-        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.35} }
-        .content { flex: 1; overflow-y: auto; padding: 26px 28px; }
-        .content::-webkit-scrollbar { width: 4px; } .content::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
-        .tab-pane { display: none; animation: fadeUp 0.22s ease; }
-        .tab-pane.active { display: block; }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+        /* ══ HAMBURGER (mobile) ══ */
+        .hamburger{display:none;background:none;border:none;padding:6px;cursor:pointer;color:var(--text-2);border-radius:var(--r-sm);align-items:center;justify-content:center;}
+        .hamburger:hover{background:var(--bg);}
+        .hamburger svg{width:20px;height:20px;display:block;}
 
-        /* PAGE HEADERS */
-        .page-header { margin-bottom: 22px; }
-        .page-header h2 { font-size: 21px; font-weight: 700; color: var(--text-1); letter-spacing: -0.03em; margin-bottom: 4px; }
-        .page-header p { color: var(--text-2); font-size: 13px; line-height: 1.6; }
+        /* ══ SIDEBAR OVERLAY (mobile) ══ */
+        .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;backdrop-filter:blur(2px);}
+        .sidebar-overlay.open{display:block;}
 
-        /* CARDS */
-        .card { background: var(--surface); border-radius: var(--r-lg); border: 1px solid var(--border); padding: 18px 20px; margin-bottom: 16px; }
-        .card-title { font-size: 13px; font-weight: 600; color: var(--text-1); margin-bottom: 14px; padding-bottom: 11px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
-        .card-title svg { width: 14px; height: 14px; color: var(--accent); }
+        /* ══ MAIN ══ */
+        .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
+        .topbar{height:50px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:10px;flex-shrink:0;}
+        .topbar-title{font-size:13.5px;font-weight:600;color:var(--text-1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+        .topbar-badge{font-size:10.5px;font-weight:500;padding:2px 8px;background:var(--accent-soft);color:var(--accent);border-radius:20px;white-space:nowrap;flex-shrink:0;}
+        .topbar-spacer{flex:1;}
+        .topbar-status{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--success);font-weight:500;white-space:nowrap;}
+        .status-dot{width:6px;height:6px;border-radius:50%;background:var(--success);animation:blink 2s infinite;flex-shrink:0;}
+        @keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+        .content{flex:1;overflow-y:auto;padding:22px 24px;}
+        .content::-webkit-scrollbar{width:4px;} .content::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:2px;}
+        .tab-pane{display:none;animation:fadeUp 0.22s ease;}
+        .tab-pane.active{display:block;}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
 
-        /* HERO */
-        .hero { background: var(--sidebar-bg); border-radius: var(--r-xl); padding: 30px 28px; margin-bottom: 16px; position: relative; overflow: hidden; }
-        .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(99,102,241,0.22) 0%, transparent 70%); }
-        .hero::after { content: ''; position: absolute; bottom: -40px; left: 30%; width: 140px; height: 140px; background: radial-gradient(circle, rgba(129,140,248,0.08) 0%, transparent 70%); }
-        .hero-eyebrow { font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-mid); margin-bottom: 10px; }
-        .hero h1 { font-size: 24px; font-weight: 700; color: #FFF; letter-spacing: -0.03em; line-height: 1.25; margin-bottom: 9px; }
-        .hero p { font-size: 13px; color: #71717A; line-height: 1.65; max-width: 500px; }
+        /* ══ PAGE HEADERS ══ */
+        .page-header{margin-bottom:20px;}
+        .page-header h2{font-size:20px;font-weight:700;color:var(--text-1);letter-spacing:-0.03em;margin-bottom:4px;}
+        .page-header p{color:var(--text-2);font-size:12.5px;line-height:1.6;}
 
-        /* STEPS */
-        .steps { list-style: none; }
-        .step { display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--border); }
-        .step:last-child { border-bottom: none; padding-bottom: 0; }
-        .step:first-child { padding-top: 0; }
-        .step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-        .step-body h4 { font-size: 13.5px; font-weight: 600; color: var(--text-1); margin-bottom: 4px; }
-        .step-body p { font-size: 12.5px; color: var(--text-2); line-height: 1.55; }
-        .step-body code { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+        /* ══ CARDS ══ */
+        .card{background:var(--surface);border-radius:var(--r-lg);border:1px solid var(--border);padding:16px 18px;margin-bottom:14px;}
+        .card-title{font-size:12.5px;font-weight:600;color:var(--text-1);margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px;}
+        .card-title svg{width:13px;height:13px;color:var(--accent);}
 
-        /* TEXTAREA */
-        textarea { width: 100%; height: 140px; padding: 12px 14px; border: 1px solid var(--border-strong); border-radius: var(--r-md); font-family: 'JetBrains Mono','Courier New',monospace; font-size: 12px; background: #FAFAFA; color: var(--text-1); resize: vertical; transition: border-color 0.15s, box-shadow 0.15s; margin-bottom: 14px; line-height: 1.6; }
-        textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(99,102,241,0.1); background: #fff; }
-        textarea::placeholder { color: var(--text-3); }
+        /* ══ HERO ══ */
+        .hero{background:var(--sidebar-bg);border-radius:var(--r-xl);padding:26px 24px;margin-bottom:14px;position:relative;overflow:hidden;}
+        .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(99,102,241,0.22) 0%,transparent 70%);}
+        .hero::after{content:'';position:absolute;bottom:-40px;left:30%;width:140px;height:140px;background:radial-gradient(circle,rgba(129,140,248,0.08) 0%,transparent 70%);}
+        .hero-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent-mid);margin-bottom:8px;}
+        .hero h1{font-size:22px;font-weight:700;color:#FFF;letter-spacing:-0.03em;line-height:1.25;margin-bottom:8px;}
+        .hero p{font-size:12.5px;color:#71717A;line-height:1.65;max-width:500px;}
 
-        /* BUTTONS */
-        .btn-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-        button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 14px; font-family: 'Inter',sans-serif; font-size: 12.5px; font-weight: 600; border-radius: var(--r-sm); border: none; cursor: pointer; transition: all 0.15s; letter-spacing: -0.01em; white-space: nowrap; }
-        button svg { width: 14px; height: 14px; flex-shrink: 0; }
-        .btn-primary { background: var(--accent); color: #fff; }
-        .btn-primary:hover { background: #4F46E5; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99,102,241,0.3); }
-        .btn-ghost { background: transparent; color: var(--danger); border: 1px solid rgba(239,68,68,0.25); }
-        .btn-ghost:hover { background: rgba(239,68,68,0.05); border-color: var(--danger); }
-        .btn-success { background: var(--success); color: #fff; }
-        .btn-success:hover { background: #059669; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(16,185,129,0.25); }
-        .btn-amber { background: var(--warning); color: #fff; }
-        .btn-amber:hover { background: #D97706; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(245,158,11,0.25); }
-        .btn-dark { background: var(--sidebar-bg); color: #C7D2FE; border: 1px solid rgba(255,255,255,0.08); }
-        .btn-dark:hover { background: #1C1C27; transform: translateY(-1px); }
-        .btn-purple { background: #7C3AED; color: #fff; }
-        .btn-purple:hover { background: #6D28D9; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(124,58,237,0.3); }
-        .btn-rose { background: #E11D48; color: #fff; }
-        .btn-rose:hover { background: #BE123C; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(225,29,72,0.3); }
-        .btn-cyan { background: #0891B2; color: #fff; }
-        .btn-cyan:hover { background: #0E7490; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(8,145,178,0.3); }
+        /* ══ STEPS ══ */
+        .steps{list-style:none;}
+        .step{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--border);}
+        .step:last-child{border-bottom:none;padding-bottom:0;} .step:first-child{padding-top:0;}
+        .step-num{width:22px;height:22px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+        .step-body h4{font-size:13px;font-weight:600;color:var(--text-1);margin-bottom:3px;}
+        .step-body p{font-size:12px;color:var(--text-2);line-height:1.55;}
+        .step-body code{font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:1px 5px;color:var(--accent);}
 
-        /* METRICS */
-        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 18px; }
-        .metric { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 16px 18px; position: relative; overflow: hidden; }
-        .metric::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: var(--r-lg) var(--r-lg) 0 0; }
-        .metric.m-indigo::after { background: linear-gradient(90deg,#6366F1,#818CF8); }
-        .metric.m-amber::after { background: linear-gradient(90deg,#F59E0B,#FCD34D); }
-        .metric.m-green::after { background: linear-gradient(90deg,#10B981,#34D399); }
-        .metric.m-red::after { background: linear-gradient(90deg,#EF4444,#F87171); }
-        .metric.m-purple::after { background: linear-gradient(90deg,#7C3AED,#A78BFA); }
-        .metric.m-cyan::after { background: linear-gradient(90deg,#0891B2,#22D3EE); }
-        .metric-label { font-size: 10.5px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
-        .metric-val { font-size: 24px; font-weight: 700; color: var(--text-1); letter-spacing: -0.03em; line-height: 1; margin-bottom: 4px; }
-        .metric-sub { font-size: 11.5px; color: var(--text-3); }
+        /* ══ TEXTAREA ══ */
+        textarea{width:100%;height:130px;padding:11px 13px;border:1px solid var(--border-strong);border-radius:var(--r-md);font-family:'JetBrains Mono','Courier New',monospace;font-size:11.5px;background:#FAFAFA;color:var(--text-1);resize:vertical;transition:border-color 0.15s,box-shadow 0.15s;margin-bottom:12px;line-height:1.6;}
+        textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,102,241,0.1);background:#fff;}
+        textarea::placeholder{color:var(--text-3);}
 
-        /* TABLE */
-        .table-wrap { overflow-x: auto; border-radius: var(--r-md); border: 1px solid var(--border); background: var(--surface); margin-bottom: 14px; }
-        table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-        th, td { padding: 9px 13px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); text-align: right; white-space: nowrap; }
-        th { background: #FAFAFA; font-weight: 600; font-size: 11.5px; color: var(--text-2); text-align: center; }
-        tr:last-child td { border-bottom: none; }
-        td:last-child, th:last-child { border-right: none; }
-        tr:hover td { background: #FAFAFA; }
-        .text-center { text-align: center; } .text-left { text-align: left; }
-        .font-bold { font-weight: 600; color: var(--text-1); }
-        .bg-light { background: #FAFAFA; }
-        .excel-cell { border: 1px solid var(--border); }
+        /* ══ BUTTONS ══ */
+        .btn-row{display:flex;gap:7px;flex-wrap:wrap;align-items:center;}
+        button{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:7px 13px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;border-radius:var(--r-sm);border:none;cursor:pointer;transition:all 0.15s;letter-spacing:-0.01em;white-space:nowrap;}
+        button svg{width:13px;height:13px;flex-shrink:0;}
+        .btn-primary{background:var(--accent);color:#fff;}
+        .btn-primary:hover{background:#4F46E5;transform:translateY(-1px);box-shadow:0 4px 12px rgba(99,102,241,0.3);}
+        .btn-ghost{background:transparent;color:var(--danger);border:1px solid rgba(239,68,68,0.25);}
+        .btn-ghost:hover{background:rgba(239,68,68,0.05);border-color:var(--danger);}
+        .btn-success{background:var(--success);color:#fff;}
+        .btn-success:hover{background:#059669;transform:translateY(-1px);box-shadow:0 4px 12px rgba(16,185,129,0.25);}
+        .btn-amber{background:var(--warning);color:#fff;}
+        .btn-amber:hover{background:#D97706;transform:translateY(-1px);box-shadow:0 4px 12px rgba(245,158,11,0.25);}
+        .btn-dark{background:var(--sidebar-bg);color:#C7D2FE;border:1px solid rgba(255,255,255,0.08);}
+        .btn-dark:hover{background:#1C1C27;transform:translateY(-1px);}
+        .btn-purple{background:#7C3AED;color:#fff;}
+        .btn-purple:hover{background:#6D28D9;transform:translateY(-1px);box-shadow:0 4px 12px rgba(124,58,237,0.3);}
+        .btn-rose{background:#E11D48;color:#fff;}
+        .btn-rose:hover{background:#BE123C;transform:translateY(-1px);box-shadow:0 4px 12px rgba(225,29,72,0.3);}
+        .btn-cyan{background:#0891B2;color:#fff;}
+        .btn-cyan:hover{background:#0E7490;transform:translateY(-1px);box-shadow:0 4px 12px rgba(8,145,178,0.3);}
+        .btn-teal{background:#0D9488;color:#fff;}
+        .btn-teal:hover{background:#0F766E;transform:translateY(-1px);box-shadow:0 4px 12px rgba(13,148,136,0.3);}
 
-        /* ACTION BAR */
-        .action-bar { background: #FAFAFA; border: 1px solid var(--border); border-radius: var(--r-md); padding: 12px 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-        .action-bar-label { font-size: 11.5px; font-weight: 500; color: var(--text-3); margin-right: 4px; }
+        /* ══ METRICS ══ */
+        .metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px;}
+        .metric{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px 16px;position:relative;overflow:hidden;}
+        .metric::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r-lg) var(--r-lg) 0 0;}
+        .metric.m-indigo::after{background:linear-gradient(90deg,#6366F1,#818CF8);}
+        .metric.m-amber::after{background:linear-gradient(90deg,#F59E0B,#FCD34D);}
+        .metric.m-green::after{background:linear-gradient(90deg,#10B981,#34D399);}
+        .metric.m-red::after{background:linear-gradient(90deg,#EF4444,#F87171);}
+        .metric.m-purple::after{background:linear-gradient(90deg,#7C3AED,#A78BFA);}
+        .metric.m-cyan::after{background:linear-gradient(90deg,#0891B2,#22D3EE);}
+        .metric.m-teal::after{background:linear-gradient(90deg,#0D9488,#2DD4BF);}
+        .metric-label{font-size:10px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:7px;}
+        .metric-val{font-size:22px;font-weight:700;color:var(--text-1);letter-spacing:-0.03em;line-height:1;margin-bottom:3px;}
+        .metric-sub{font-size:11px;color:var(--text-3);}
 
-        /* CHART CONTAINER */
-        .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 18px 20px; margin-bottom: 16px; }
-        .chart-title { font-size: 12.5px; font-weight: 600; color: var(--text-1); margin-bottom: 14px; display: flex; align-items: center; gap: 7px; }
-        .chart-title span.dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-        .chart-wrap { position: relative; width: 100%; height: 180px; }
-        canvas.chart-canvas { width: 100% !important; height: 180px !important; }
-        .chart-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; }
-        .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-2); font-weight: 500; }
-        .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+        /* ══ TABLE ══ */
+        .table-wrap{overflow-x:auto;border-radius:var(--r-md);border:1px solid var(--border);background:var(--surface);margin-bottom:12px;}
+        table{width:100%;border-collapse:collapse;font-size:12px;}
+        th,td{padding:8px 12px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);text-align:right;white-space:nowrap;}
+        th{background:#FAFAFA;font-weight:600;font-size:11px;color:var(--text-2);text-align:center;}
+        tr:last-child td{border-bottom:none;}
+        td:last-child,th:last-child{border-right:none;}
+        tr:hover td{background:#FAFAFA;}
+        .text-center{text-align:center;} .text-left{text-align:left;}
+        .font-bold{font-weight:600;color:var(--text-1);}
+        .bg-light{background:#FAFAFA;}
+        .excel-cell{border:1px solid var(--border);}
+        /* DTR row highlight */
+        .dtr-row td{background:#FFFBEB !important;color:#92400E;font-size:11px;}
+        .dtr-row td:first-child{font-weight:600;color:#78350F;}
 
-        /* TWO COL LAYOUT */
-        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
-        @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+        /* ══ ACTION BAR ══ */
+        .action-bar{background:#FAFAFA;border:1px solid var(--border);border-radius:var(--r-md);padding:11px 13px;margin-bottom:14px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+        .action-bar-label{font-size:11px;font-weight:500;color:var(--text-3);margin-right:4px;}
 
-        /* TOAST */
-        #toast-container { position: fixed; top: 16px; right: 16px; z-index: 9999; display: flex; flex-direction: column; gap: 7px; }
-        .toast { background: var(--sidebar-bg); color: #E4E4E7; padding: 10px 15px; border-radius: var(--r-md); font-size: 12.5px; font-weight: 500; border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; gap: 8px; animation: toastIn 0.22s ease forwards; opacity: 0; transform: translateX(8px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
-        .toast.fade-out { animation: toastOut 0.28s ease forwards; }
-        @keyframes toastIn { to { opacity:1; transform:translateX(0); } }
-        @keyframes toastOut { to { opacity:0; transform:translateY(-6px); } }
+        /* ══ DTR SECTION ══ */
+        .dtr-section{background:#FFFBEB;border:1px solid #FDE68A;border-radius:var(--r-md);padding:12px 14px;margin-bottom:14px;}
+        .dtr-section-title{font-size:11.5px;font-weight:700;color:#78350F;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+        .dtr-section-title svg{width:13px;height:13px;}
+        .dtr-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin-bottom:10px;}
+        .dtr-card{background:#FEF3C7;border:1px solid #FDE68A;border-radius:var(--r-sm);padding:10px 12px;}
+        .dtr-card-label{font-size:10px;font-weight:600;color:#92400E;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;}
+        .dtr-card-val{font-size:20px;font-weight:700;color:#78350F;line-height:1;}
+        .dtr-card-sub{font-size:10.5px;color:#A16207;margin-top:2px;}
+        .dtr-copy-row{display:flex;gap:6px;flex-wrap:wrap;}
 
-        /* FOOTER */
-        .footer { text-align: center; padding: 13px; font-size: 11.5px; color: var(--text-3); border-top: 1px solid var(--border); background: var(--surface); }
-        .hidden-ta { display: none; }
-        .chip { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 500; color: var(--accent); background: var(--accent-soft); padding: 4px 9px; border-radius: 20px; margin-top: 9px; }
-        .chip svg { width: 12px; height: 12px; }
-        .section-label { font-size: 11px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
-        .copy-date-row { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 14px; }
+        /* ══ CHART ══ */
+        .chart-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px 18px;margin-bottom:14px;}
+        .chart-title{font-size:12px;font-weight:600;color:var(--text-1);margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+        .chart-wrap{position:relative;width:100%;height:170px;}
+        canvas.chart-canvas{width:100%!important;height:170px!important;}
+        .chart-legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;}
+        .legend-item{display:flex;align-items:center;gap:4px;font-size:10.5px;color:var(--text-2);font-weight:500;}
+        .legend-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+
+        /* ══ TWO COL ══ */
+        .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+
+        /* ══ TOAST ══ */
+        #toast-container{position:fixed;top:14px;right:14px;z-index:9999;display:flex;flex-direction:column;gap:6px;}
+        .toast{background:var(--sidebar-bg);color:#E4E4E7;padding:9px 14px;border-radius:var(--r-md);font-size:12px;font-weight:500;border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;gap:7px;animation:toastIn 0.22s ease forwards;opacity:0;transform:translateX(8px);box-shadow:0 8px 24px rgba(0,0,0,0.18);}
+        .toast.fade-out{animation:toastOut 0.28s ease forwards;}
+        @keyframes toastIn{to{opacity:1;transform:translateX(0);}}
+        @keyframes toastOut{to{opacity:0;transform:translateY(-6px);}}
+
+        /* ══ FOOTER ══ */
+        .footer{text-align:center;padding:11px;font-size:11px;color:var(--text-3);border-top:1px solid var(--border);background:var(--surface);}
+        .hidden-ta{display:none;}
+        .chip{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:500;color:var(--accent);background:var(--accent-soft);padding:4px 9px;border-radius:20px;margin-top:8px;}
+        .chip svg{width:11px;height:11px;}
+        .section-label{font-size:10.5px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:7px;}
+        .copy-date-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+
+        /* ══ MOBILE RESPONSIVE ══ */
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .sidebar {
+                position: fixed; top: 0; left: -260px; height: 100%;
+                z-index: 300; width: 240px; transition: left 0.25s ease;
+                box-shadow: 4px 0 24px rgba(0,0,0,0.35);
+            }
+            .sidebar.open { left: 0; }
+            .topbar { padding: 0 12px; height: 46px; gap: 8px; }
+            .topbar-title { font-size: 12.5px; }
+            .topbar-status span:not(.status-dot) { display: none; }
+            .content { padding: 14px 13px 24px; }
+            .hero { padding: 20px 16px; border-radius: var(--r-lg); }
+            .hero h1 { font-size: 18px; }
+            .hero p { font-size: 12px; }
+            .page-header { margin-bottom: 16px; }
+            .page-header h2 { font-size: 18px; }
+            .metrics-grid { grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+            .metric { padding: 11px 12px; }
+            .metric-val { font-size: 17px; }
+            .metric-label { font-size: 9.5px; }
+            .two-col { grid-template-columns: 1fr; gap: 10px; }
+            .dtr-cards { grid-template-columns: 1fr 1fr; gap: 7px; }
+            .card { padding: 13px 14px; margin-bottom: 11px; }
+            .chart-card { padding: 12px 13px; }
+            .chart-wrap { height: 150px; }
+            canvas.chart-canvas { height: 150px !important; }
+            .btn-row { gap: 6px; }
+            button { padding: 7px 11px; font-size: 11.5px; }
+            .copy-date-row button, .dtr-copy-row button { font-size: 11px; padding: 6px 10px; }
+            textarea { height: 110px; font-size: 11px; margin-bottom: 10px; }
+            .action-bar { padding: 9px 11px; gap: 6px; }
+            #toast-container { top: 54px; right: 10px; left: 10px; }
+            .toast { font-size: 11.5px; padding: 8px 12px; }
+            .footer { padding: 9px; font-size: 10.5px; }
+        }
+        @media (max-width: 420px) {
+            .dtr-cards { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 16px; }
+            .hero { padding: 16px 13px; }
+            .metrics-grid { gap: 6px; }
+        }
     </style>
 </head>
 <body>
@@ -217,6 +283,7 @@ echo "Script tambahan sukses di-copy!"</textarea>
 
 <div id="toast-container"></div>
 
+<!-- ══ SIDEBAR (desktop) ══ -->
 <aside class="sidebar">
     <div class="brand">
         <div class="brand-logo">
@@ -226,33 +293,37 @@ echo "Script tambahan sukses di-copy!"</textarea>
     </div>
     <div class="nav-section">
         <div class="nav-label">Menu</div>
-        <div class="nav-item active" onclick="switchTab('home',this)">
+        <div class="nav-item active" id="snav-home" onclick="switchTab('home',this)">
             <svg fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
             Beranda<span class="nav-dot"></span>
         </div>
         <div class="nav-label">Rekap Trafik</div>
-        <div class="nav-item" onclick="switchTab('dashboard',this)">
+        <div class="nav-item" id="snav-dashboard" onclick="switchTab('dashboard',this)">
             <svg fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
             Traffic SMS Real Time<span class="nav-dot"></span>
         </div>
-        <div class="nav-item" onclick="switchTab('wa_traffic',this)">
+        <div class="nav-item" id="snav-wa_traffic" onclick="switchTab('wa_traffic',this)">
             <svg fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
             Traffic WhatsApp<span class="nav-dot"></span>
         </div>
-        <div class="nav-item" onclick="switchTab('sms_traffic',this)">
+        <div class="nav-item" id="snav-sms_traffic" onclick="switchTab('sms_traffic',this)">
             <svg fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
             Traffic SMS<span class="nav-dot"></span>
         </div>
     </div>
-    <div class="sidebar-footer"><div class="version-tag">v2.1 · 2026</div></div>
+    <div class="sidebar-footer"><div class="version-tag">v2.3 · 2026</div></div>
 </aside>
 
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<!-- ══ MAIN ══ -->
 <div class="main">
     <div class="topbar">
+        <button class="hamburger" onclick="toggleSidebar()" aria-label="Menu"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
         <span class="topbar-title" id="topbar-title">Beranda</span>
         <span class="topbar-badge" id="topbar-badge">Overview</span>
         <div class="topbar-spacer"></div>
-        <div class="topbar-status"><span class="status-dot"></span>Sistem aktif</div>
+        <div class="topbar-status"><span class="status-dot"></span><span>Sistem aktif</span></div>
     </div>
     <div class="content">
 
@@ -260,8 +331,8 @@ echo "Script tambahan sukses di-copy!"</textarea>
         <div id="home" class="tab-pane active">
             <div class="hero">
                 <div class="hero-eyebrow">⚡ Automation Tool</div>
-                <h1>Selamat Datang,<br>NOC SMS & WA!</h1>
-                <p>Parsing log trafik SMS MDM &amp; JATIS jadi tabel siap export Excel — dalam hitungan detik. Pilih tab di sidebar untuk mulai.</p>
+                <h1>Selamat Datang,<br>NOC SMS &amp; WA!</h1>
+                <p>Parsing log trafik SMS MDM &amp; JATIS jadi tabel siap export Excel — dalam hitungan detik.</p>
             </div>
             <div class="card">
                 <div class="card-title">
@@ -274,7 +345,7 @@ echo "Script tambahan sukses di-copy!"</textarea>
                         <div class="step-body">
                             <h4>Tarik Data dari Server</h4>
                             <p>Remote via PuTTY ke IP <code>10.0.3.3</code>, masuk ke <code>cd satkom/svr/APR</code>, jalankan script AWK.</p>
-                            <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+                            <div style="margin-top:9px;display:flex;gap:7px;flex-wrap:wrap;">
                                 <button class="btn-dark" onclick="copyPuTTYCommand()"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>Copy Command PuTTY</button>
                             </div>
                             <div class="chip"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Paste ke PuTTY via klik kanan setelah copy</div>
@@ -284,14 +355,14 @@ echo "Script tambahan sukses di-copy!"</textarea>
                         <div class="step-num">2</div>
                         <div class="step-body">
                             <h4>Pilih Tab &amp; Paste Data</h4>
-                            <p>Pilih tab di sidebar — <strong>Traffic SMS Real Time</strong> untuk raw log PuTTY, <strong>Traffic WhatsApp</strong> untuk WABA, atau <strong>Traffic SMS</strong> untuk tabel report harian.</p>
+                            <p><strong>RT SMS</strong> untuk raw log PuTTY · <strong>WA</strong> untuk WABA · <strong>SMS</strong> untuk tabel report harian (TRF + DTR).</p>
                         </div>
                     </li>
                     <li class="step">
                         <div class="step-num">3</div>
                         <div class="step-body">
                             <h4>Process &amp; Export ke Excel</h4>
-                            <p>Klik <strong>Process Data</strong>, lalu gunakan tombol Copy per tanggal atau Copy Full Tabel untuk paste langsung ke Excel.</p>
+                            <p>Klik <strong>Process Data</strong>, gunakan tombol Copy per tanggal (TRF atau DTR) untuk paste langsung ke Excel.</p>
                         </div>
                     </li>
                 </ul>
@@ -302,7 +373,7 @@ echo "Script tambahan sukses di-copy!"</textarea>
         <div id="dashboard" class="tab-pane">
             <div class="page-header">
                 <h2>Traffic SMS Real Time</h2>
-                <p>Paste log data trafik SMS (raw PuTTY output) untuk analisa dan rekapitulasi per provider MDM &amp; JATIS.</p>
+                <p>Paste log data trafik SMS (raw PuTTY output) untuk analisa per provider MDM &amp; JATIS.</p>
             </div>
             <div class="card">
                 <textarea id="logInput" placeholder="Paste raw log data di sini (AGGR : MDM / JTS)..."></textarea>
@@ -314,13 +385,12 @@ echo "Script tambahan sukses di-copy!"</textarea>
             <div id="outputSection" style="display:none;">
                 <div class="metrics-grid">
                     <div class="metric m-indigo"><div class="metric-label">Peak Hour</div><div class="metric-val" id="anaPeakVal">0</div><div class="metric-sub" id="anaPeakHour">–</div></div>
-                    <div class="metric m-amber"><div class="metric-label">Top Provider MDM</div><div class="metric-val" id="anaTopMdm" style="font-size:17px;">—</div><div class="metric-sub" id="anaTopMdmVal">0 SMS</div></div>
-                    <div class="metric m-green"><div class="metric-label">Top Provider JATIS</div><div class="metric-val" id="anaTopJatis" style="font-size:17px;">Telkomsel</div><div class="metric-sub" id="anaTopJatisVal">0 SMS</div></div>
-                    <div class="metric m-red"><div class="metric-label">Total Keseluruhan</div><div class="metric-val" id="anaTotalAll" style="color:var(--accent);">0</div><div class="metric-sub">MDM + JATIS</div></div>
+                    <div class="metric m-amber"><div class="metric-label">Top MDM</div><div class="metric-val" id="anaTopMdm" style="font-size:15px;">—</div><div class="metric-sub" id="anaTopMdmVal">0 SMS</div></div>
+                    <div class="metric m-green"><div class="metric-label">Top JATIS</div><div class="metric-val" id="anaTopJatis" style="font-size:15px;">Telkomsel</div><div class="metric-sub" id="anaTopJatisVal">0 SMS</div></div>
+                    <div class="metric m-red"><div class="metric-label">Total MDM+JATIS</div><div class="metric-val" id="anaTotalAll" style="color:var(--accent);">0</div><div class="metric-sub">Keseluruhan</div></div>
                 </div>
-                <!-- RT Chart -->
                 <div class="chart-card">
-                    <div class="chart-title"><span class="dot" style="background:#6366F1;width:8px;height:8px;border-radius:50%;"></span>Trafik Per Jam — MDM vs JATIS</div>
+                    <div class="chart-title"><span style="background:#6366F1;width:8px;height:8px;border-radius:50%;display:inline-block;"></span>Trafik Per Jam — MDM vs JATIS</div>
                     <div class="chart-wrap"><canvas id="rtChart" class="chart-canvas"></canvas></div>
                     <div class="chart-legend">
                         <div class="legend-item"><span class="legend-dot" style="background:#6366F1;"></span>MDM Total</div>
@@ -330,7 +400,7 @@ echo "Script tambahan sukses di-copy!"</textarea>
                 <div class="action-bar">
                     <span class="action-bar-label">Export:</span>
                     <button class="btn-success" onclick="copyTables()"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>Copy Full Tabel</button>
-                    <button class="btn-amber" onclick="copyDataOnly()"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>Copy Nilai Provider Saja</button>
+                    <button class="btn-amber" onclick="copyDataOnly()"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>Copy Nilai Provider</button>
                 </div>
                 <div id="tableContainer"></div>
             </div>
@@ -340,7 +410,7 @@ echo "Script tambahan sukses di-copy!"</textarea>
         <div id="wa_traffic" class="tab-pane">
             <div class="page-header">
                 <h2>Traffic WhatsApp (WABA)</h2>
-                <p>Ctrl+A → Ctrl+C seluruh isi web Traffic WABA, lalu paste di bawah untuk rekap horizontal per jam.</p>
+                <p>Ctrl+A → Ctrl+C dari web monitoring WABA metalogic, paste di bawah untuk rekap per jam.</p>
             </div>
             <div class="card">
                 <textarea id="waInput" placeholder="Ctrl+A dan Ctrl+C dari web monitoring WABA metalogic, lalu paste di sini...&#10;Contoh:&#10;00.00 - 01.00&#10;Total: 30213"></textarea>
@@ -355,8 +425,8 @@ echo "Script tambahan sukses di-copy!"</textarea>
         <!-- SMS TRAFFIC -->
         <div id="sms_traffic" class="tab-pane">
             <div class="page-header">
-                <h2>Traffic SMS (Total TRF)</h2>
-                <p>Ctrl+A → Ctrl+C tabel web report SMS, paste di bawah. Sistem otomatis deteksi per tanggal untuk ambil nilai TRF per jam.</p>
+                <h2>Traffic SMS (TRF + DTR)</h2>
+                <p>Ctrl+A → Ctrl+C dari web pak RW yg hourly, paste di bawah. Sistem deteksi TRF dan hitung average DTR per tanggal.</p>
             </div>
             <div class="card">
                 <textarea id="smsInput" placeholder="Ctrl+A dan Ctrl+C dari web pak RW yg hourly, lalu paste di sini...&#10;Contoh:&#10;2026-06-14&#9;96.683&#9;0,0&#10;2026-06-13&#9;96.683&#9;0,0&#9;98.781&#9;5,5 ..."></textarea>
@@ -373,34 +443,49 @@ echo "Script tambahan sukses di-copy!"</textarea>
 </div>
 
 <script>
-// ─────────────────────────────────────────
-// TAB META & NAV
-// ─────────────────────────────────────────
+// ═══════════════════════════════════════════
+// TAB NAV
+// ═══════════════════════════════════════════
 const tabMeta = {
     home:        { title:'Beranda', badge:'Overview' },
     dashboard:   { title:'Traffic SMS Real Time', badge:'Real Time' },
     wa_traffic:  { title:'Traffic WhatsApp', badge:'WABA' },
-    sms_traffic: { title:'Traffic SMS', badge:'TRF' }
+    sms_traffic: { title:'Traffic SMS', badge:'TRF + DTR' }
 };
 window.currentWaData  = {};
-window.currentSmsData = {};
+window.currentSmsData = {};   // { 'SMS (YYYY-MM-DD)': { trf:[24], dtr:[24] } }
 
 function switchTab(tabId, el) {
     document.querySelectorAll('.tab-pane').forEach(t=>t.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
     document.getElementById(tabId).classList.add('active');
-    el.classList.add('active');
+    const sEl = document.getElementById('snav-'+tabId);
+    if(sEl) sEl.classList.add('active');
     const m = tabMeta[tabId]||{};
     document.getElementById('topbar-title').textContent = m.title||'';
     document.getElementById('topbar-badge').textContent = m.badge||'';
+    document.querySelector('.content').scrollTop = 0;
+    closeSidebar();
 }
 
+function toggleSidebar() {
+    document.querySelector('.sidebar').classList.toggle('open');
+    document.getElementById('sidebarOverlay').classList.toggle('open');
+}
+function closeSidebar() {
+    document.querySelector('.sidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('open');
+}
+
+// ═══════════════════════════════════════════
+// TOAST & COPY UTIL
+// ═══════════════════════════════════════════
 function showToast(msg, type='success') {
     const c=document.getElementById('toast-container');
     const t=document.createElement('div'); t.className='toast';
     const ic = type==='success'
-        ? '<svg width="15" height="15" fill="none" stroke="#10B981" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>'
-        : '<svg width="15" height="15" fill="none" stroke="#EF4444" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>';
+        ? '<svg width="14" height="14" fill="none" stroke="#10B981" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>'
+        : '<svg width="14" height="14" fill="none" stroke="#EF4444" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>';
     t.innerHTML=`${ic}<span>${msg}</span>`;
     c.appendChild(t);
     setTimeout(()=>{t.classList.add('fade-out');setTimeout(()=>t.remove(),350);},3000);
@@ -414,316 +499,338 @@ function copyText(str, label) {
     document.body.removeChild(ta);
 }
 
-function copyPuTTYCommand()    { copyText(document.getElementById('puttyCommand').value, 'Command AWK'); }
-function copyAdditionalCommand(){ copyText(document.getElementById('additionalCommand').value, 'Command tambahan'); }
+function copyPuTTYCommand(){ copyText(document.getElementById('puttyCommand').value,'Command AWK'); }
 
-// ─────────────────────────────────────────
-// MINI CHART ENGINE (pure canvas, no lib)
-// ─────────────────────────────────────────
+// ═══════════════════════════════════════════
+// MINI CHART ENGINE
+// ═══════════════════════════════════════════
 function drawLineChart(canvasId, datasets, labels) {
-    const canvas = document.getElementById(canvasId);
-    if (!canvas) return;
-    const dpr = window.devicePixelRatio || 1;
-    const W = canvas.offsetWidth, H = canvas.offsetHeight || 180;
-    canvas.width  = W * dpr;
-    canvas.height = H * dpr;
-    const ctx = canvas.getContext('2d');
-    ctx.scale(dpr, dpr);
-
-    const PAD = { top:10, right:14, bottom:28, left:52 };
-    const cW = W - PAD.left - PAD.right;
-    const cH = H - PAD.top  - PAD.bottom;
-
-    // find max
-    let allVals = datasets.flatMap(d=>d.data);
-    let maxV = Math.max(...allVals, 1);
-
-    // grid lines
-    ctx.strokeStyle = 'rgba(0,0,0,0.06)';
-    ctx.lineWidth = 1;
-    for (let i=0; i<=4; i++) {
-        const y = PAD.top + cH - (cH * i / 4);
-        ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(PAD.left+cW, y); ctx.stroke();
-        ctx.fillStyle = '#A1A1AA'; ctx.font = '10px Inter,sans-serif'; ctx.textAlign='right';
-        const val = Math.round(maxV * i / 4);
-        ctx.fillText(val >= 1000 ? (val/1000).toFixed(0)+'k' : val, PAD.left-5, y+3.5);
+    const canvas=document.getElementById(canvasId); if(!canvas) return;
+    const dpr=window.devicePixelRatio||1;
+    const W=canvas.offsetWidth, H=canvas.offsetHeight||170;
+    canvas.width=W*dpr; canvas.height=H*dpr;
+    const ctx=canvas.getContext('2d'); ctx.scale(dpr,dpr);
+    const PAD={top:10,right:14,bottom:28,left:50};
+    const cW=W-PAD.left-PAD.right, cH=H-PAD.top-PAD.bottom;
+    let maxV=Math.max(...datasets.flatMap(d=>d.data),1);
+    ctx.strokeStyle='rgba(0,0,0,0.06)'; ctx.lineWidth=1;
+    for(let i=0;i<=4;i++){
+        const y=PAD.top+cH-(cH*i/4);
+        ctx.beginPath(); ctx.moveTo(PAD.left,y); ctx.lineTo(PAD.left+cW,y); ctx.stroke();
+        ctx.fillStyle='#A1A1AA'; ctx.font='9.5px Inter,sans-serif'; ctx.textAlign='right';
+        const v=Math.round(maxV*i/4);
+        ctx.fillText(v>=1000?(v/1000).toFixed(0)+'k':v, PAD.left-4, y+3.5);
     }
-
-    // x labels (every 2h)
-    ctx.fillStyle = '#A1A1AA'; ctx.font = '9.5px Inter,sans-serif'; ctx.textAlign='center';
-    for (let i=0; i<labels.length; i+=2) {
-        const x = PAD.left + (cW * i / (labels.length-1));
-        ctx.fillText(labels[i], x, H - PAD.bottom + 14);
+    ctx.fillStyle='#A1A1AA'; ctx.font='9px Inter,sans-serif'; ctx.textAlign='center';
+    for(let i=0;i<labels.length;i+=2){
+        const x=PAD.left+(cW*i/(labels.length-1));
+        ctx.fillText(labels[i], x, H-PAD.bottom+13);
     }
-
-    // datasets
-    datasets.forEach(ds => {
-        const pts = ds.data.map((v,i)=>({
-            x: PAD.left + (cW * i / (ds.data.length-1)),
-            y: PAD.top  + cH - (cH * v / maxV)
-        }));
-        // area fill
-        ctx.beginPath();
-        ctx.moveTo(pts[0].x, PAD.top+cH);
-        pts.forEach(p=>ctx.lineTo(p.x, p.y));
-        ctx.lineTo(pts[pts.length-1].x, PAD.top+cH);
-        ctx.closePath();
-        ctx.fillStyle = ds.fillColor;
-        ctx.fill();
-        // line
-        ctx.beginPath();
-        ctx.moveTo(pts[0].x, pts[0].y);
-        for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i].x, pts[i].y);
-        ctx.strokeStyle = ds.color;
-        ctx.lineWidth = 2;
-        ctx.lineJoin = 'round';
-        ctx.stroke();
+    datasets.forEach(ds=>{
+        const pts=ds.data.map((v,i)=>({x:PAD.left+(cW*i/(ds.data.length-1)),y:PAD.top+cH-(cH*v/maxV)}));
+        ctx.beginPath(); ctx.moveTo(pts[0].x,PAD.top+cH);
+        pts.forEach(p=>ctx.lineTo(p.x,p.y));
+        ctx.lineTo(pts[pts.length-1].x,PAD.top+cH); ctx.closePath();
+        ctx.fillStyle=ds.fillColor; ctx.fill();
+        ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y);
+        for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i].x,pts[i].y);
+        ctx.strokeStyle=ds.color; ctx.lineWidth=2; ctx.lineJoin='round'; ctx.stroke();
     });
 }
 
 function drawBarChart(canvasId, data, labels, color) {
-    const canvas = document.getElementById(canvasId);
-    if (!canvas) return;
-    const dpr = window.devicePixelRatio || 1;
-    const W = canvas.offsetWidth, H = canvas.offsetHeight || 180;
-    canvas.width  = W * dpr;
-    canvas.height = H * dpr;
-    const ctx = canvas.getContext('2d');
-    ctx.scale(dpr, dpr);
-
-    const PAD = { top:10, right:14, bottom:28, left:52 };
-    const cW = W - PAD.left - PAD.right;
-    const cH = H - PAD.top  - PAD.bottom;
-    const maxV = Math.max(...data, 1);
-    const barW = cW / data.length * 0.65;
-
-    ctx.strokeStyle = 'rgba(0,0,0,0.06)'; ctx.lineWidth=1;
-    for(let i=0;i<=4;i++) {
-        const y = PAD.top + cH - (cH*i/4);
+    const canvas=document.getElementById(canvasId); if(!canvas) return;
+    const dpr=window.devicePixelRatio||1;
+    const W=canvas.offsetWidth, H=canvas.offsetHeight||170;
+    canvas.width=W*dpr; canvas.height=H*dpr;
+    const ctx=canvas.getContext('2d'); ctx.scale(dpr,dpr);
+    const PAD={top:10,right:14,bottom:28,left:50};
+    const cW=W-PAD.left-PAD.right, cH=H-PAD.top-PAD.bottom;
+    const maxV=Math.max(...data,1), barW=cW/data.length*0.65;
+    ctx.strokeStyle='rgba(0,0,0,0.06)'; ctx.lineWidth=1;
+    for(let i=0;i<=4;i++){
+        const y=PAD.top+cH-(cH*i/4);
         ctx.beginPath(); ctx.moveTo(PAD.left,y); ctx.lineTo(PAD.left+cW,y); ctx.stroke();
-        ctx.fillStyle='#A1A1AA'; ctx.font='10px Inter,sans-serif'; ctx.textAlign='right';
-        const val=Math.round(maxV*i/4);
-        ctx.fillText(val>=1000?(val/1000).toFixed(0)+'k':val, PAD.left-5, y+3.5);
+        ctx.fillStyle='#A1A1AA'; ctx.font='9.5px Inter,sans-serif'; ctx.textAlign='right';
+        const v=Math.round(maxV*i/4);
+        ctx.fillText(v>=1000?(v/1000).toFixed(0)+'k':v, PAD.left-4, y+3.5);
     }
-
-    data.forEach((v,i) => {
-        const x = PAD.left + (cW * (i+0.5) / data.length) - barW/2;
-        const barH = cH * v / maxV;
-        const y = PAD.top + cH - barH;
-        ctx.fillStyle = color;
-        ctx.beginPath();
-        ctx.roundRect ? ctx.roundRect(x, y, barW, barH, [3,3,0,0]) : ctx.rect(x,y,barW,barH);
+    data.forEach((v,i)=>{
+        const x=PAD.left+(cW*(i+0.5)/data.length)-barW/2;
+        const bH=cH*v/maxV, y=PAD.top+cH-bH;
+        ctx.fillStyle=color; ctx.beginPath();
+        ctx.roundRect?ctx.roundRect(x,y,barW,bH,[3,3,0,0]):ctx.rect(x,y,barW,bH);
         ctx.fill();
     });
-
-    ctx.fillStyle='#A1A1AA'; ctx.font='9.5px Inter,sans-serif'; ctx.textAlign='center';
-    labels.forEach((l,i)=>{
-        if(i%2===0){
-            const x = PAD.left + (cW*(i+0.5)/labels.length);
-            ctx.fillText(l, x, H-PAD.bottom+14);
-        }
-    });
+    ctx.fillStyle='#A1A1AA'; ctx.font='9px Inter,sans-serif'; ctx.textAlign='center';
+    labels.forEach((l,i)=>{ if(i%2===0){ const x=PAD.left+(cW*(i+0.5)/labels.length); ctx.fillText(l,x,H-PAD.bottom+13); }});
 }
 
-// ─────────────────────────────────────────
+// ═══════════════════════════════════════════
 // WA TRAFFIC
-// ─────────────────────────────────────────
+// ═══════════════════════════════════════════
 function processWA() {
-    let text = document.getElementById('waInput').value;
-    if (!text.trim()) return showToast('Data WABA masih kosong!','error');
-
-    let hourlyData = Array(24).fill(0);
-    let lines = text.split('\n');
-    let found = false;
-
-    for (let i=0; i<lines.length; i++) {
-        let lc = lines[i].replace(/\u00A0/g,' ').trim();
-        let mh = lc.match(/(\d{2})[.:]\d{2}\s*-\s*(\d{2})[.:]\d{2}/);
-        if (mh) {
-            let hour = parseInt(mh[1],10);
-            for (let j=i+1; j<Math.min(i+5,lines.length); j++) {
-                let nl = lines[j].replace(/\u00A0/g,' ').trim();
-                let mt = nl.match(/Total:\s*([\d,.]+)/i);
-                if (mt) {
-                    let v = parseInt(mt[1].replace(/[^0-9]/g,''),10);
-                    if (!isNaN(v)) { hourlyData[hour]=v; found=true; break; }
-                }
+    let text=document.getElementById('waInput').value;
+    if(!text.trim()) return showToast('Data WABA masih kosong!','error');
+    let hourlyData=Array(24).fill(0), lines=text.split('\n'), found=false;
+    for(let i=0;i<lines.length;i++){
+        let lc=lines[i].replace(/\u00A0/g,' ').trim();
+        let mh=lc.match(/(\d{2})[.:]\d{2}\s*-\s*(\d{2})[.:]\d{2}/);
+        if(mh){
+            let hour=parseInt(mh[1],10);
+            for(let j=i+1;j<Math.min(i+5,lines.length);j++){
+                let nl=lines[j].replace(/\u00A0/g,' ').trim();
+                let mt=nl.match(/Total:\s*([\d,.]+)/i);
+                if(mt){ let v=parseInt(mt[1].replace(/[^0-9]/g,''),10); if(!isNaN(v)){hourlyData[hour]=v;found=true;break;} }
             }
         }
     }
-    if (!found) return showToast('Gagal deteksi pola Total WABA. Ulangi paste!','error');
-
-    window.currentWaData = { 'WHATSAPP': hourlyData };
+    if(!found) return showToast('Gagal deteksi pola Total WABA. Ulangi paste!','error');
+    // WA only has TRF, no DTR — store in new format
+    window.currentWaData = { 'WHATSAPP': { trf: hourlyData, dtr: null } };
     renderTrafficOutput('waOutput', window.currentWaData, 'WA', 'Summary Traffic WhatsApp (WABA)');
     showToast('Data WABA berhasil diproses!');
 }
 
-// ─────────────────────────────────────────
-// SMS TRAFFIC
-// ─────────────────────────────────────────
+// ═══════════════════════════════════════════
+// SMS TRAFFIC — parse TRF + DTR
+// ═══════════════════════════════════════════
 function processSMS() {
-    let text = document.getElementById('smsInput').value;
-    if (!text.trim()) return showToast('Data SMS masih kosong!','error');
+    let text=document.getElementById('smsInput').value;
+    if(!text.trim()) return showToast('Data SMS masih kosong!','error');
 
-    let dataByDate = {};
-    let found = false;
+    // dataByDate[date] = { trf: [], dtr: [] }
+    let dataByDate={}, found=false;
 
-    text.split('\n').forEach(line => {
-        let cols = line.replace(/\r/g,'').split('\t').map(c=>c.trim());
+    text.split('\n').forEach(line=>{
+        let cols=line.replace(/\r/g,'').split('\t').map(c=>c.trim());
         let dIdx=-1, dVal='';
-        for (let ci=0; ci<cols.length; ci++) {
+        for(let ci=0;ci<cols.length;ci++){
             let m=cols[ci].match(/(\d{4}-\d{2}-\d{2})/);
-            if (m) { dIdx=ci; dVal=m[1]; break; }
+            if(m){dIdx=ci;dVal=m[1];break;}
         }
-        if (dIdx<0) return;
+        if(dIdx<0) return;
+        if(!dataByDate[dVal]) dataByDate[dVal]={trf:[],dtr:[]};
 
-        if (!dataByDate[dVal]) dataByDate[dVal]=[];
-        let dataCols = cols.slice(dIdx+1);
-        for (let i=0; i<dataCols.length; i+=2) {
-            let raw=dataCols[i];
-            if (raw===''||raw===undefined) { dataByDate[dVal].push(0); continue; }
-            let v=parseInt(raw.replace(/\./g,'').replace(',','.'),10);
-            dataByDate[dVal].push(isNaN(v)?0:v);
+        let dataCols=cols.slice(dIdx+1);
+        for(let i=0;i<dataCols.length;i+=2){
+            // TRF col (even index)
+            let rawTrf=dataCols[i];
+            if(rawTrf===''||rawTrf===undefined){
+                dataByDate[dVal].trf.push(0);
+                dataByDate[dVal].dtr.push(null); // null = no data this slot
+                continue;
+            }
+            let trfVal=parseInt(rawTrf.replace(/\./g,'').replace(',','.'),10);
+            dataByDate[dVal].trf.push(isNaN(trfVal)?0:trfVal);
+
+            // DTR col (odd index) — format "5,5" or "0,0"
+            let rawDtr=dataCols[i+1];
+            if(rawDtr===''||rawDtr===undefined){
+                dataByDate[dVal].dtr.push(null);
+            } else {
+                // DTR pakai koma sebagai desimal
+                let dtrVal=parseFloat(rawDtr.replace(',','.'));
+                dataByDate[dVal].dtr.push(isNaN(dtrVal)?null:dtrVal);
+            }
         }
         found=true;
     });
 
-    if (!found) return showToast('Gagal deteksi data SMS. Pastikan format tanggal YYYY-MM-DD ada!','error');
+    if(!found) return showToast('Gagal deteksi data SMS. Pastikan format tanggal YYYY-MM-DD ada!','error');
 
+    // pad to 24 slots
     let finalData={};
-    for (let d in dataByDate) {
-        let arr=dataByDate[d];
-        while(arr.length<24) arr.push(0);
-        finalData[`SMS (${d})`]=arr.slice(0,24);
+    for(let d in dataByDate){
+        let obj=dataByDate[d];
+        while(obj.trf.length<24) obj.trf.push(0);
+        while(obj.dtr.length<24) obj.dtr.push(null);
+        finalData[`SMS (${d})`]={ trf: obj.trf.slice(0,24), dtr: obj.dtr.slice(0,24) };
     }
-    window.currentSmsData = finalData;
-    renderTrafficOutput('smsOutput', finalData, 'SMS', 'Summary Traffic SMS (TRF) Per Hari');
+    window.currentSmsData=finalData;
+    renderTrafficOutput('smsOutput', finalData, 'SMS', 'Summary Traffic SMS (TRF + DTR) Per Hari');
     showToast('Data SMS berhasil diproses!');
 }
 
-// ─────────────────────────────────────────
-// RENDER TRAFFIC OUTPUT — WA & SMS
-// (tabel horizontal + grafik + copy per tanggal)
-// ─────────────────────────────────────────
-const PALETTE = ['#6366F1','#10B981','#F59E0B','#EF4444','#7C3AED','#0891B2','#E11D48'];
-const PALETTE_FILL = [
-    'rgba(99,102,241,0.08)','rgba(16,185,129,0.08)','rgba(245,158,11,0.08)',
-    'rgba(239,68,68,0.08)','rgba(124,58,237,0.08)','rgba(8,145,178,0.08)','rgba(225,29,72,0.08)'
-];
+// ═══════════════════════════════════════════
+// RENDER TRAFFIC OUTPUT
+// Support: dataObj values can be { trf, dtr } (SMS) or { trf, dtr:null } (WA)
+// ═══════════════════════════════════════════
+const PALETTE     = ['#6366F1','#10B981','#F59E0B','#EF4444','#7C3AED','#0891B2','#E11D48'];
+const PALETTE_FILL= ['rgba(99,102,241,0.08)','rgba(16,185,129,0.08)','rgba(245,158,11,0.08)','rgba(239,68,68,0.08)','rgba(124,58,237,0.08)','rgba(8,145,178,0.08)','rgba(225,29,72,0.08)'];
 const BTN_CLASSES = ['btn-primary','btn-success','btn-amber','btn-rose','btn-purple','btn-cyan','btn-dark'];
 
 function renderTrafficOutput(containerId, dataObj, type, title) {
-    const labels = [];
-    for(let i=0;i<24;i++) labels.push(`${String(i).padStart(2,'0')}.00`);
-    const dateKeys = Object.keys(dataObj);
+    const labels=Array.from({length:24},(_,i)=>`${String(i).padStart(2,'0')}.00`);
+    const dateKeys=Object.keys(dataObj);
+    const hasDtr = type==='SMS'; // only SMS has DTR
 
-    // ── Metrics
+    // ── helper: get trf array
+    const getTrf = dk => dataObj[dk].trf || dataObj[dk]; // backward compat
+
+    // ── Metrics (TRF based)
     let totalAll=0, peakHour=0, peakVal=0, maxDate='—', maxDateVal=0;
     dateKeys.forEach(dk=>{
-        let s=dataObj[dk].reduce((a,b)=>a+b,0);
-        totalAll+=s;
-        if(s>maxDateVal){maxDateVal=s;maxDate=dk;}
+        let s=getTrf(dk).reduce((a,b)=>a+(b||0),0);
+        totalAll+=s; if(s>maxDateVal){maxDateVal=s;maxDate=dk;}
     });
-    // peak hour across all dates
     for(let h=0;h<24;h++){
-        let hv=dateKeys.reduce((a,dk)=>a+(dataObj[dk][h]||0),0);
+        let hv=dateKeys.reduce((a,dk)=>a+(getTrf(dk)[h]||0),0);
         if(hv>peakVal){peakVal=hv;peakHour=h;}
     }
-    const peakStr=`${String(peakHour).padStart(2,'0')}.00 – ${String(peakHour+1).padStart(2,'0')}.00`;
+    const peakStr=`${String(peakHour).padStart(2,'0')}.00–${String(peakHour+1).padStart(2,'0')}.00`;
+
+    // ── DTR stats per date
+    let dtrStats = {}; // { dk: { avg, nonNullCount, values[24] } }
+    if(hasDtr){
+        dateKeys.forEach(dk=>{
+            let dtrArr = dataObj[dk].dtr;
+            let nonNull = dtrArr.filter(v=>v!==null&&v!==undefined);
+            let avg = nonNull.length ? (nonNull.reduce((a,b)=>a+b,0)/nonNull.length) : 0;
+            dtrStats[dk] = { avg: avg.toFixed(2), count: nonNull.length, values: dtrArr };
+        });
+    }
+
+    // ── Metrics HTML
+    let extraMetrics = '';
+    if(hasDtr && dateKeys.length===1){
+        const avg = dtrStats[dateKeys[0]].avg;
+        extraMetrics=`<div class="metric m-teal"><div class="metric-label">Avg DTR</div><div class="metric-val">${avg}%</div><div class="metric-sub">${dateKeys[0]}</div></div>`;
+    }
 
     let metricsHtml=`<div class="metrics-grid">
         <div class="metric m-indigo"><div class="metric-label">Peak Hour</div><div class="metric-val">${peakVal.toLocaleString('id-ID')}</div><div class="metric-sub">Pukul ${peakStr}</div></div>
-        <div class="metric m-green"><div class="metric-label">Total Keseluruhan</div><div class="metric-val" style="font-size:20px;">${totalAll.toLocaleString('id-ID')}</div><div class="metric-sub">${dateKeys.length} tanggal</div></div>
-        <div class="metric m-amber"><div class="metric-label">Tanggal Tertinggi</div><div class="metric-val" style="font-size:15px;">${maxDate}</div><div class="metric-sub">${maxDateVal.toLocaleString('id-ID')}</div></div>
-        <div class="metric m-purple"><div class="metric-label">Rata-rata/Jam</div><div class="metric-val">${Math.round(totalAll/(24*dateKeys.length||1)).toLocaleString('id-ID')}</div><div class="metric-sub">Across all dates</div></div>
+        <div class="metric m-green"><div class="metric-label">Total TRF</div><div class="metric-val" style="font-size:18px;">${totalAll.toLocaleString('id-ID')}</div><div class="metric-sub">${dateKeys.length} tanggal</div></div>
+        <div class="metric m-amber"><div class="metric-label">Tgl Tertinggi</div><div class="metric-val" style="font-size:13px;">${maxDate}</div><div class="metric-sub">${maxDateVal.toLocaleString('id-ID')}</div></div>
+        <div class="metric m-purple"><div class="metric-label">Rata-rata/Jam</div><div class="metric-val">${Math.round(totalAll/(24*dateKeys.length||1)).toLocaleString('id-ID')}</div><div class="metric-sub">All dates</div></div>
+        ${extraMetrics}
     </div>`;
 
+    // ── DTR Section (SMS only, multi-date)
+    let dtrSectionHtml='';
+    if(hasDtr){
+        let dtrCardsInner = dateKeys.map(dk=>{
+            const st=dtrStats[dk];
+            return `<div class="dtr-card">
+                <div class="dtr-card-label">${dk}</div>
+                <div class="dtr-card-val">${st.avg}%</div>
+                <div class="dtr-card-sub">Dari ${st.count} jam aktif</div>
+            </div>`;
+        }).join('');
+
+        let dtrCopyBtns = dateKeys.map((dk,i)=>{
+            const cls=BTN_CLASSES[i%BTN_CLASSES.length];
+            return `<button class="${cls}" onclick="copyDtrValues('${dk}')">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 11h.01M12 11h.01M15 11h.01M4 19h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                DTR ${dk}
+            </button>`;
+        }).join('');
+
+        dtrSectionHtml=`<div class="dtr-section">
+            <div class="dtr-section-title">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                Average DTR Per Tanggal
+            </div>
+            <div class="dtr-cards">${dtrCardsInner}</div>
+            <div class="section-label" style="margin-bottom:6px;">Copy nilai DTR per tanggal (24 jam)</div>
+            <div class="dtr-copy-row">${dtrCopyBtns}</div>
+        </div>`;
+    }
+
     // ── Charts
-    const chartLineId = `chart_line_${type}`;
-    const chartBarId  = `chart_bar_${type}`;
-
-    let datasetsJson = dateKeys.map((dk,i)=>({
-        label: dk,
-        data: dataObj[dk],
-        color: PALETTE[i % PALETTE.length],
-        fillColor: PALETTE_FILL[i % PALETTE_FILL.length]
+    const chartLineId=`chart_line_${type}`, chartBarId=`chart_bar_${type}`;
+    let datasetsJson=dateKeys.map((dk,i)=>({
+        label:dk, data:getTrf(dk), color:PALETTE[i%PALETTE.length], fillColor:PALETTE_FILL[i%PALETTE_FILL.length]
     }));
+    let peakHoursData=Array.from({length:24},(_,h)=>dateKeys.reduce((a,dk)=>a+(getTrf(dk)[h]||0),0));
 
-    // peak hours bar (sum all dates)
-    let peakHoursData = [];
-    for(let h=0;h<24;h++) peakHoursData.push(dateKeys.reduce((a,dk)=>a+(dataObj[dk][h]||0),0));
-
-    let chartsHtml=`
-    <div class="two-col">
+    let chartsHtml=`<div class="two-col">
         <div class="chart-card">
-            <div class="chart-title"><span class="dot" style="background:#6366F1;width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:2px;"></span>Tren Trafik Per Jam</div>
+            <div class="chart-title"><span style="background:#6366F1;width:7px;height:7px;border-radius:50%;display:inline-block;"></span>Tren TRF Per Jam</div>
             <div class="chart-wrap"><canvas id="${chartLineId}" class="chart-canvas"></canvas></div>
             <div class="chart-legend">${dateKeys.map((dk,i)=>`<div class="legend-item"><span class="legend-dot" style="background:${PALETTE[i%PALETTE.length]};"></span>${dk}</div>`).join('')}</div>
         </div>
         <div class="chart-card">
-            <div class="chart-title"><span class="dot" style="background:#F59E0B;width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:2px;"></span>Volume Per Jam (Gabungan)</div>
+            <div class="chart-title"><span style="background:#F59E0B;width:7px;height:7px;border-radius:50%;display:inline-block;"></span>Volume Per Jam (Gabungan)</div>
             <div class="chart-wrap"><canvas id="${chartBarId}" class="chart-canvas"></canvas></div>
         </div>
     </div>`;
 
-    // ── Copy per-tanggal buttons
-    let copyBtnsHtml=`<div class="section-label">Copy nilai per tanggal</div><div class="copy-date-row">`;
+    // ── Copy TRF per tanggal
+    let copyTrfHtml=`<div class="section-label">Copy nilai TRF per tanggal</div><div class="copy-date-row">`;
     dateKeys.forEach((dk,i)=>{
-        const btnCls = BTN_CLASSES[i % BTN_CLASSES.length];
-        copyBtnsHtml+=`<button class="${btnCls}" onclick="copyDateValues('${type}','${dk}')">
+        const cls=BTN_CLASSES[i%BTN_CLASSES.length];
+        copyTrfHtml+=`<button class="${cls}" onclick="copyDateValues('${type}','${dk}')">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-            Copy ${dk}
+            TRF ${dk}
         </button>`;
     });
-    copyBtnsHtml+=`</div>`;
+    copyTrfHtml+=`</div>`;
 
-    // ── Table
+    // ── Table (TRF rows + DTR avg row)
     let tableHtml=`<div class="table-wrap"><table id="table_${type}"><tr>
         <th class="excel-cell bg-light text-center" style="min-width:130px;">Tanggal / Layanan</th>`;
-    for(let i=0;i<24;i++){
-        tableHtml+=`<th class="excel-cell bg-light" style="min-width:75px;">${String(i).padStart(2,'0')}.00–${String(i+1).padStart(2,'0')}.00</th>`;
-    }
-    tableHtml+=`<th class="excel-cell bg-light text-center" style="min-width:95px;">Total</th></tr>`;
+    for(let i=0;i<24;i++) tableHtml+=`<th class="excel-cell bg-light" style="min-width:72px;">${String(i).padStart(2,'0')}.00–${String(i+1).padStart(2,'0')}.00</th>`;
+    tableHtml+=`<th class="excel-cell bg-light text-center" style="min-width:90px;">Total / Avg</th></tr>`;
 
     dateKeys.forEach((dk,di)=>{
-        let arr=dataObj[dk], total=arr.reduce((a,b)=>a+b,0);
-        tableHtml+=`<tr><td class="excel-cell font-bold bg-light text-left" style="white-space:nowrap;">${dk}</td>`;
-        arr.forEach(v=>{
-            tableHtml+=`<td class="excel-cell text-center">${v===0?'–':v.toLocaleString('id-ID')}</td>`;
-        });
+        let arr=getTrf(dk), total=arr.reduce((a,b)=>a+(b||0),0);
+        tableHtml+=`<tr><td class="excel-cell font-bold bg-light text-left">${dk}</td>`;
+        arr.forEach(v=>{ tableHtml+=`<td class="excel-cell text-center">${(v||0)===0?'–':(v).toLocaleString('id-ID')}</td>`; });
         tableHtml+=`<td class="excel-cell font-bold text-center" style="color:${PALETTE[di%PALETTE.length]};background:#FAFAFA;">${total.toLocaleString('id-ID')}</td></tr>`;
+
+        // DTR row per tanggal (SMS only)
+        if(hasDtr){
+            let dArr=dataObj[dk].dtr;
+            const st=dtrStats[dk];
+            tableHtml+=`<tr class="dtr-row"><td class="excel-cell text-left">DTR avg (${dk})</td>`;
+            dArr.forEach(v=>{ tableHtml+=`<td class="excel-cell text-center">${v===null||v===undefined?'–':v.toFixed(1)+'%'}</td>`; });
+            tableHtml+=`<td class="excel-cell font-bold text-center" style="color:#92400E;">${st.avg}%</td></tr>`;
+        }
     });
     tableHtml+=`</table></div>`;
 
-    // ── Copy full buttons
+    // ── Action bar
     let actionHtml=`<div class="action-bar">
         <span class="action-bar-label">Export:</span>
         <button class="btn-success" onclick="copyTableElem('table_${type}')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>Copy Tabel Lengkap</button>
-        <button class="btn-amber" onclick="copyAllHorizontal('${type}')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>Copy Semua Nilai (Tab)</button>
+        <button class="btn-amber" onclick="copyAllHorizontal('${type}')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>Copy Semua TRF (Tab)</button>
     </div>`;
 
-    const out = document.getElementById(containerId);
-    out.innerHTML = `<div class="card" style="padding:18px 20px;">${metricsHtml}${chartsHtml}${copyBtnsHtml}${actionHtml}${tableHtml}</div>`;
+    const out=document.getElementById(containerId);
+    out.innerHTML=`<div class="card" style="padding:16px 18px;">${metricsHtml}${dtrSectionHtml}${chartsHtml}${copyTrfHtml}${actionHtml}${tableHtml}</div>`;
     out.style.display='block';
 
-    // Draw charts after DOM ready
     requestAnimationFrame(()=>{
         drawLineChart(chartLineId, datasetsJson, labels);
         drawBarChart(chartBarId, peakHoursData, labels, 'rgba(245,158,11,0.75)');
     });
 }
 
+// ── Copy TRF values for a specific date
 function copyDateValues(type, dateKey) {
     const dataObj = type==='WA' ? window.currentWaData : window.currentSmsData;
-    if (!dataObj || !dataObj[dateKey]) return showToast('Data tidak ditemukan!','error');
-    copyText(dataObj[dateKey].join('\t'), `Nilai ${dateKey}`);
+    if(!dataObj||!dataObj[dateKey]) return showToast('Data tidak ditemukan!','error');
+    const arr = dataObj[dateKey].trf || dataObj[dateKey];
+    copyText(arr.join('\t'), `TRF ${dateKey}`);
+}
+
+// ── Copy DTR average value only for a specific date
+function copyDtrValues(dateKey) {
+    const dataObj = window.currentSmsData;
+    if(!dataObj||!dataObj[dateKey]) return showToast('Data tidak ditemukan!','error');
+    const dtrArr = dataObj[dateKey].dtr;
+    if(!dtrArr) return showToast('Data DTR tidak tersedia!','error');
+    const nonNull = dtrArr.filter(v=>v!==null&&v!==undefined);
+    if(!nonNull.length) return showToast('Tidak ada data DTR valid!','error');
+    const avg = (nonNull.reduce((a,b)=>a+b,0)/nonNull.length).toFixed(2);
+    copyText(avg, `Avg DTR ${dateKey}`);
 }
 
 function copyTableElem(tableId) {
     const el=document.getElementById(tableId);
     const r=document.createRange(); r.selectNode(el);
-    window.getSelection().removeAllRanges();
-    window.getSelection().addRange(r);
+    window.getSelection().removeAllRanges(); window.getSelection().addRange(r);
     try { document.execCommand('copy'); showToast('Tabel disalin! Siap paste ke Excel.'); }
     catch(e) { showToast('Gagal menyalin tabel','error'); }
     window.getSelection().removeAllRanges();
@@ -733,34 +840,31 @@ function copyAllHorizontal(type) {
     const dataObj = type==='WA' ? window.currentWaData : window.currentSmsData;
     if(!dataObj||!Object.keys(dataObj).length) return showToast('Data belum diproses!','error');
     let tsv='';
-    for(let dk in dataObj) tsv+=dataObj[dk].join('\t')+'\n';
-    copyText(tsv.trimEnd(), 'Semua nilai');
+    for(let dk in dataObj){
+        const arr = dataObj[dk].trf || dataObj[dk];
+        tsv+=arr.join('\t')+'\n';
+    }
+    copyText(tsv.trimEnd(), 'Semua nilai TRF');
 }
 
-// ─────────────────────────────────────────
+// ═══════════════════════════════════════════
 // DASHBOARD = Traffic SMS Real Time
-// ─────────────────────────────────────────
-window.currentDataMap = null;
+// ═══════════════════════════════════════════
+window.currentDataMap=null;
 
 function generateSummary() {
-    let inputText = document.getElementById('logInput').value;
-    if (!inputText.trim()) { showToast('Log masih kosong!','error'); return; }
-
-    let dataMap = {
-        'MDM':  { 'Indosat':[], 'XL':[], 'Telkomsel':[], '3 (Hutchison)':[], 'Smartfren':[], 'Axis':[], 'Unknown':[] },
-        'JATIS':{ 'Telkomsel':[] }
+    let inputText=document.getElementById('logInput').value;
+    if(!inputText.trim()){showToast('Log masih kosong!','error');return;}
+    let dataMap={
+        'MDM':{'Indosat':[],'XL':[],'Telkomsel':[],'3 (Hutchison)':[],'Smartfren':[],'Axis':[],'Unknown':[]},
+        'JATIS':{'Telkomsel':[]}
     };
-    for(let i=0;i<24;i++){
-        for(let op in dataMap['MDM']) dataMap['MDM'][op][i]=0;
-        dataMap['JATIS']['Telkomsel'][i]=0;
-    }
-
+    for(let i=0;i<24;i++){for(let op in dataMap['MDM']) dataMap['MDM'][op][i]=0; dataMap['JATIS']['Telkomsel'][i]=0;}
     let lines=inputText.split(/\r?\n/), curAggr='', found=false;
     for(let i=0;i<lines.length;i++){
-        let lc=lines[i].replace(/\u00A0/g,' ').trim();
-        if(!lc) continue;
+        let lc=lines[i].replace(/\u00A0/g,' ').trim(); if(!lc) continue;
         let am=lc.match(/AGGR\s*:\s*(MDM|JTS)/i);
-        if(am){ curAggr=am[1].toUpperCase()==='JTS'?'JATIS':'MDM'; continue; }
+        if(am){curAggr=am[1].toUpperCase()==='JTS'?'JATIS':'MDM';continue;}
         let dm=lc.match(/^(\d{2})\s+([A-Za-z0-9_-]+)\s+(\d+)$/);
         if(dm&&curAggr){
             found=true;
@@ -772,16 +876,14 @@ function generateSummary() {
             else if(oprRaw==='SMARTFREN') opr='Smartfren';
             else if(oprRaw==='AXIS') opr='Axis';
             else if(oprRaw==='UNKNOWN') opr='Unknown';
-            if(dataMap[curAggr]&&dataMap[curAggr][opr]!==undefined)
-                dataMap[curAggr][opr][hour]+=total;
+            if(dataMap[curAggr]&&dataMap[curAggr][opr]!==undefined) dataMap[curAggr][opr][hour]+=total;
         }
     }
-    if(!found){ showToast('Format tidak sesuai / Data tidak ditemukan.','error'); return; }
-
+    if(!found){showToast('Format tidak sesuai / Data tidak ditemukan.','error');return;}
     window.currentDataMap=dataMap;
 
-    const fmt=(n,z=false)=>{ if(n===0) return z?'':'-'; return n.toLocaleString('en-US'); };
-    const pct=(p,t)=>{ if(t===0) return '0.00%'; return ((p/t)*100).toFixed(2)+'%'; };
+    const fmt=(n,z=false)=>{if(n===0) return z?'':'-'; return n.toLocaleString('en-US');};
+    const pct=(p,t)=>{if(t===0) return '0.00%'; return ((p/t)*100).toFixed(2)+'%';};
 
     let totMdm={}, grandMdm=0, topProv={name:'—',total:0};
     for(let op in dataMap['MDM']){
@@ -791,15 +893,12 @@ function generateSummary() {
     }
     let sumJatis=dataMap['JATIS']['Telkomsel'].reduce((a,b)=>a+b,0);
     let grandAll=grandMdm+sumJatis;
-
     let peakV=0, peakStr='00.00–01.00';
     for(let i=0;i<24;i++){
-        let hv=0;
-        for(let op in dataMap['MDM']) hv+=dataMap['MDM'][op][i];
+        let hv=0; for(let op in dataMap['MDM']) hv+=dataMap['MDM'][op][i];
         hv+=dataMap['JATIS']['Telkomsel'][i];
-        if(hv>peakV){ peakV=hv; peakStr=`${String(i).padStart(2,'0')}.00 – ${String(i+1).padStart(2,'0')}.00`; }
+        if(hv>peakV){peakV=hv;peakStr=`${String(i).padStart(2,'0')}.00–${String(i+1).padStart(2,'0')}.00`;}
     }
-
     document.getElementById('anaPeakVal').textContent=fmt(peakV);
     document.getElementById('anaPeakHour').textContent='Pukul: '+peakStr;
     document.getElementById('anaTopMdm').textContent=topProv.name;
@@ -808,40 +907,20 @@ function generateSummary() {
     document.getElementById('anaTopJatisVal').textContent=fmt(sumJatis)+' SMS';
     document.getElementById('anaTotalAll').textContent=fmt(grandAll);
 
-    // draw RT chart
-    const mdmHourly=[], jatisHourly=[];
-    for(let i=0;i<24;i++){
-        let mv=0; for(let op in dataMap['MDM']) mv+=dataMap['MDM'][op][i];
-        mdmHourly.push(mv); jatisHourly.push(dataMap['JATIS']['Telkomsel'][i]);
-    }
-    const labels=Array.from({length:24},(_,i)=>`${String(i).padStart(2,'0')}.00`);
-    requestAnimationFrame(()=>{
-        drawLineChart('rtChart',[
-            {label:'MDM',data:mdmHourly,color:'#6366F1',fillColor:'rgba(99,102,241,0.09)'},
-            {label:'JATIS',data:jatisHourly,color:'#10B981',fillColor:'rgba(16,185,129,0.07)'}
-        ], labels);
-    });
+    const mdmHourly=[],jatisHourly=[];
+    for(let i=0;i<24;i++){let mv=0;for(let op in dataMap['MDM']) mv+=dataMap['MDM'][op][i];mdmHourly.push(mv);jatisHourly.push(dataMap['JATIS']['Telkomsel'][i]);}
+    const lbls=Array.from({length:24},(_,i)=>`${String(i).padStart(2,'0')}.00`);
+    requestAnimationFrame(()=>{drawLineChart('rtChart',[{label:'MDM',data:mdmHourly,color:'#6366F1',fillColor:'rgba(99,102,241,0.09)'},{label:'JATIS',data:jatisHourly,color:'#10B981',fillColor:'rgba(16,185,129,0.07)'}],lbls);});
 
     const today=new Date();
     const dateStr=today.toLocaleDateString('id-ID',{day:'2-digit',month:'long',year:'numeric'});
-
-    let html=`<div class="table-wrap" style="margin-bottom:16px;"><table id="mainTable">
-        <tr><th colspan="9" class="text-left bg-light excel-cell" style="font-size:13px;padding:12px 14px;">Monitoring Trafik SMS</th></tr>
+    let html=`<div class="table-wrap" style="margin-bottom:14px;"><table id="mainTable">
+        <tr><th colspan="9" class="text-left bg-light excel-cell" style="font-size:12.5px;padding:11px 13px;">Monitoring Trafik SMS</th></tr>
         <tr><th colspan="9" class="text-center bg-light excel-cell" style="font-weight:400;color:var(--text-2);">${dateStr}</th></tr>
-        <tr>
-            <th rowspan="2" class="text-center excel-cell" style="vertical-align:middle;">Interval</th>
-            <th colspan="7" class="text-center excel-cell">MDM</th>
-            <th class="text-center excel-cell">JATIS</th>
-        </tr>
-        <tr>
-            <th class="excel-cell">Indosat</th><th class="excel-cell">XL</th><th class="excel-cell">Telkomsel</th>
-            <th class="excel-cell">3 (Hutchison)</th><th class="excel-cell">Smartfren</th>
-            <th class="excel-cell">Axis</th><th class="excel-cell">Unknown</th>
-            <th class="excel-cell">Telkomsel</th>
-        </tr>`;
-
+        <tr><th rowspan="2" class="text-center excel-cell" style="vertical-align:middle;">Interval</th><th colspan="7" class="text-center excel-cell">MDM</th><th class="text-center excel-cell">JATIS</th></tr>
+        <tr><th class="excel-cell">Indosat</th><th class="excel-cell">XL</th><th class="excel-cell">Telkomsel</th><th class="excel-cell">3 (Hutchison)</th><th class="excel-cell">Smartfren</th><th class="excel-cell">Axis</th><th class="excel-cell">Unknown</th><th class="excel-cell">Telkomsel</th></tr>`;
     for(let i=0;i<24;i++){
-        let h1=String(i).padStart(2,'0')+'.00', h2=String(i+1).padStart(2,'0')+'.00';
+        let h1=String(i).padStart(2,'0')+'.00',h2=String(i+1).padStart(2,'0')+'.00';
         html+=`<tr><td class="text-center excel-cell">${h1}–${h2}</td>
             <td class="excel-cell">${fmt(dataMap['MDM']['Indosat'][i],true)}</td>
             <td class="excel-cell">${fmt(dataMap['MDM']['XL'][i],true)}</td>
@@ -850,70 +929,59 @@ function generateSummary() {
             <td class="excel-cell">${fmt(dataMap['MDM']['Smartfren'][i],true)}</td>
             <td class="excel-cell">${fmt(dataMap['MDM']['Axis'][i],true)}</td>
             <td class="excel-cell">${fmt(dataMap['MDM']['Unknown'][i],true)}</td>
-            <td class="excel-cell">${fmt(dataMap['JATIS']['Telkomsel'][i],true)}</td>
-        </tr>`;
+            <td class="excel-cell">${fmt(dataMap['JATIS']['Telkomsel'][i],true)}</td></tr>`;
     }
-
-    html+=`<tr class="font-bold bg-light">
-        <td class="text-center excel-cell">Total</td>
+    html+=`<tr class="font-bold bg-light"><td class="text-center excel-cell">Total</td>
         <td class="excel-cell">${fmt(totMdm['Indosat'])}</td><td class="excel-cell">${fmt(totMdm['XL'])}</td>
         <td class="excel-cell">${fmt(totMdm['Telkomsel'])}</td><td class="excel-cell">${fmt(totMdm['3 (Hutchison)'])}</td>
         <td class="excel-cell">${fmt(totMdm['Smartfren'])}</td><td class="excel-cell">${fmt(totMdm['Axis'])}</td>
-        <td class="excel-cell">${fmt(totMdm['Unknown'])}</td><td class="excel-cell">${fmt(sumJatis)}</td>
-    </tr>
-    <tr class="bg-light">
-        <td class="text-center font-bold excel-cell">% Provider/Hari</td>
+        <td class="excel-cell">${fmt(totMdm['Unknown'])}</td><td class="excel-cell">${fmt(sumJatis)}</td></tr>
+    <tr class="bg-light"><td class="text-center font-bold excel-cell">% Provider/Hari</td>
         <td class="excel-cell">${pct(totMdm['Indosat'],grandMdm)}</td><td class="excel-cell">${pct(totMdm['XL'],grandMdm)}</td>
         <td class="excel-cell">${pct(totMdm['Telkomsel'],grandMdm)}</td><td class="excel-cell">${pct(totMdm['3 (Hutchison)'],grandMdm)}</td>
         <td class="excel-cell">${pct(totMdm['Smartfren'],grandMdm)}</td><td class="excel-cell">${pct(totMdm['Axis'],grandMdm)}</td>
-        <td class="excel-cell">${pct(totMdm['Unknown'],grandMdm)}</td><td class="excel-cell">100.00%</td>
-    </tr></table></div>`;
+        <td class="excel-cell">${pct(totMdm['Unknown'],grandMdm)}</td><td class="excel-cell">100.00%</td></tr></table></div>`;
 
     let provList=['Telkomsel','Indosat','XL','3 (Hutchison)','Smartfren','Axis','Unknown'];
-    html+=`<div class="table-wrap" style="max-width:560px;"><table>
-        <tr><th colspan="4" class="text-left excel-cell" style="background:#F5F5FF;color:var(--accent);padding:11px 14px;">Summary Trafik SMS ${today.getFullYear()}</th></tr>
+    html+=`<div class="table-wrap" style="max-width:520px;"><table>
+        <tr><th colspan="4" class="text-left excel-cell" style="background:#F5F5FF;color:var(--accent);padding:10px 13px;">Summary Trafik SMS ${today.getFullYear()}</th></tr>
         <tr><th class="excel-cell">Provider</th><th class="excel-cell">MDM</th><th class="excel-cell">JATIS</th><th class="excel-cell">TOTAL</th></tr>`;
     provList.forEach(prov=>{
         let mv=totMdm[prov]||0, jv=(prov==='Telkomsel')?sumJatis:0;
         html+=`<tr><td class="text-left excel-cell">${prov}</td><td class="excel-cell">${fmt(mv)}</td><td class="excel-cell">${fmt(jv)}</td>
             <td class="font-bold excel-cell" style="color:var(--accent);">${fmt(mv+jv)}</td></tr>`;
     });
-    html+=`<tr class="font-bold bg-light">
-        <td class="text-left excel-cell">Total Trafik</td>
+    html+=`<tr class="font-bold bg-light"><td class="text-left excel-cell">Total Trafik</td>
         <td class="excel-cell">${fmt(grandMdm)}</td><td class="excel-cell">${fmt(sumJatis)}</td>
-        <td class="excel-cell" style="color:var(--accent);">${fmt(grandAll)}</td>
-    </tr></table></div>`;
+        <td class="excel-cell" style="color:var(--accent);">${fmt(grandAll)}</td></tr></table></div>`;
 
     document.getElementById('tableContainer').innerHTML=html;
     document.getElementById('outputSection').style.display='block';
     showToast('Dashboard berhasil diperbarui!');
 }
 
-function clearAll() {
+function clearAll(){
     document.getElementById('logInput').value='';
     document.getElementById('tableContainer').innerHTML='';
     document.getElementById('outputSection').style.display='none';
     window.currentDataMap=null;
     showToast('Area kerja dibersihkan.');
 }
-function copyTables() {
+function copyTables(){
     const el=document.getElementById('tableContainer');
     const r=document.createRange(); r.selectNode(el);
     window.getSelection().removeAllRanges(); window.getSelection().addRange(r);
-    try { document.execCommand('copy'); showToast('Tabel disalin! Siap paste ke Excel.'); }
-    catch(e) { showToast('Gagal menyalin','error'); }
+    try{document.execCommand('copy');showToast('Tabel disalin! Siap paste ke Excel.');}
+    catch(e){showToast('Gagal menyalin','error');}
     window.getSelection().removeAllRanges();
 }
-function copyDataOnly() {
-    if(!window.currentDataMap){ showToast('Proses data dulu!','error'); return; }
+function copyDataOnly(){
+    if(!window.currentDataMap){showToast('Proses data dulu!','error');return;}
     const dm=window.currentDataMap;
     const oprs=['Indosat','XL','Telkomsel','3 (Hutchison)','Smartfren','Axis','Unknown'];
     let rows=[];
-    for(let i=0;i<24;i++){
-        let row=[]; oprs.forEach(op=>row.push(dm['MDM'][op][i]||0));
-        row.push(dm['JATIS']['Telkomsel'][i]||0); rows.push(row.join('\t'));
-    }
-    copyText(rows.join('\n'), 'Nilai provider');
+    for(let i=0;i<24;i++){let row=[];oprs.forEach(op=>row.push(dm['MDM'][op][i]||0));row.push(dm['JATIS']['Telkomsel'][i]||0);rows.push(row.join('\t'));}
+    copyText(rows.join('\n'),'Nilai provider');
 }
 </script>
 </body>
